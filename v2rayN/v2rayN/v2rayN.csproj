@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net8.0-windows10.0.17763</TargetFramework>
+		<TargetFramework>net9.0-windows10.0.17763</TargetFramework>
 		<GenerateSatelliteAssembliesForCore>true</GenerateSatelliteAssembliesForCore>
 		<UseWPF>true</UseWPF>
 		<ApplicationIcon>Resources\v2rayN.ico</ApplicationIcon>
@@ -13,7 +13,7 @@
 	<ItemGroup>
 		<PackageReference Include="MaterialDesignThemes" />
 		<PackageReference Include="H.NotifyIcon.Wpf" />
-		<PackageReference Include="ReactiveUI.Fody">
+		<PackageReference Include="ReactiveUI.SourceGenerators">
 			<TreatAsUsed>true</TreatAsUsed>
 		</PackageReference>
 		<PackageReference Include="ReactiveUI.WPF" />

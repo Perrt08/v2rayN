@@ -1,21 +1,20 @@
 namespace ServiceLib.ViewModels;
 
-public class AddGroupServerViewModel : MyReactiveObject
+public partial class AddGroupServerViewModel : MyReactiveObject
 {
     [Reactive]
-    public ProfileItem SelectedSource { get; set; }
+    public partial ProfileItem SelectedSource { get; set; }
 
     [Reactive]
-    public ProfileItem SelectedChild { get; set; }
+    public partial ProfileItem SelectedChild { get; set; }
 
-    [Reactive]
     public IList<ProfileItem> SelectedChildren { get; set; }
 
     [Reactive]
-    public string? CoreType { get; set; }
+    public partial string? CoreType { get; set; }
 
     [Reactive]
-    public string? PolicyGroupType { get; set; }
+    public partial string? PolicyGroupType { get; set; }
 
     public IObservableCollection<ProfileItem> ChildItemsObs { get; } = new ObservableCollectionExtended<ProfileItem>();
 

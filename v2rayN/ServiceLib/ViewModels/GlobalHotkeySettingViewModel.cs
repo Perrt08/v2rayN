@@ -1,6 +1,6 @@
 namespace ServiceLib.ViewModels;
 
-public class GlobalHotkeySettingViewModel : MyReactiveObject
+public partial class GlobalHotkeySettingViewModel : MyReactiveObject
 {
     private readonly List<KeyEventItem> _globalHotkeys;
 

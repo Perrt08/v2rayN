@@ -1,31 +1,31 @@
 namespace ServiceLib.ViewModels;
 
-public class DNSSettingViewModel : MyReactiveObject
+public partial class DNSSettingViewModel : MyReactiveObject
 {
-    [Reactive] public bool? UseSystemHosts { get; set; }
-    [Reactive] public bool? AddCommonHosts { get; set; }
-    [Reactive] public bool? FakeIP { get; set; }
-    [Reactive] public bool? BlockBindingQuery { get; set; }
-    [Reactive] public string? DirectDNS { get; set; }
-    [Reactive] public string? RemoteDNS { get; set; }
-    [Reactive] public string? BootstrapDNS { get; set; }
-    [Reactive] public string? RayStrategy4Freedom { get; set; }
-    [Reactive] public string? SingboxStrategy4Direct { get; set; }
-    [Reactive] public string? SingboxStrategy4Proxy { get; set; }
-    [Reactive] public string? Hosts { get; set; }
-    [Reactive] public string? DirectExpectedIPs { get; set; }
+    [Reactive] public partial bool? UseSystemHosts { get; set; }
+    [Reactive] public partial bool? AddCommonHosts { get; set; }
+    [Reactive] public partial bool? FakeIP { get; set; }
+    [Reactive] public partial bool? BlockBindingQuery { get; set; }
+    [Reactive] public partial string? DirectDNS { get; set; }
+    [Reactive] public partial string? RemoteDNS { get; set; }
+    [Reactive] public partial string? BootstrapDNS { get; set; }
+    [Reactive] public partial string? RayStrategy4Freedom { get; set; }
+    [Reactive] public partial string? SingboxStrategy4Direct { get; set; }
+    [Reactive] public partial string? SingboxStrategy4Proxy { get; set; }
+    [Reactive] public partial string? Hosts { get; set; }
+    [Reactive] public partial string? DirectExpectedIPs { get; set; }
 
-    [Reactive] public bool UseSystemHostsCompatible { get; set; }
-    [Reactive] public string DomainStrategy4FreedomCompatible { get; set; }
-    [Reactive] public string DomainDNSAddressCompatible { get; set; }
-    [Reactive] public string NormalDNSCompatible { get; set; }
+    [Reactive] public partial bool UseSystemHostsCompatible { get; set; }
+    [Reactive] public partial string DomainStrategy4FreedomCompatible { get; set; }
+    [Reactive] public partial string DomainDNSAddressCompatible { get; set; }
+    [Reactive] public partial string NormalDNSCompatible { get; set; }
 
-    [Reactive] public string DomainStrategy4Freedom2Compatible { get; set; }
-    [Reactive] public string DomainDNSAddress2Compatible { get; set; }
-    [Reactive] public string NormalDNS2Compatible { get; set; }
-    [Reactive] public string TunDNS2Compatible { get; set; }
-    [Reactive] public bool RayCustomDNSEnableCompatible { get; set; }
-    [Reactive] public bool SBCustomDNSEnableCompatible { get; set; }
+    [Reactive] public partial string DomainStrategy4Freedom2Compatible { get; set; }
+    [Reactive] public partial string DomainDNSAddress2Compatible { get; set; }
+    [Reactive] public partial string NormalDNS2Compatible { get; set; }
+    [Reactive] public partial string TunDNS2Compatible { get; set; }
+    [Reactive] public partial bool RayCustomDNSEnableCompatible { get; set; }
+    [Reactive] public partial bool SBCustomDNSEnableCompatible { get; set; }
 
     [ObservableAsProperty] public bool IsSimpleDNSEnabled { get; }
 
@@ -54,7 +54,7 @@ public class DNSSettingViewModel : MyReactiveObject
 
         this.WhenAnyValue(x => x.RayCustomDNSEnableCompatible, x => x.SBCustomDNSEnableCompatible)
             .Select(x => !(x.Item1 && x.Item2))
-            .ToPropertyEx(this, x => x.IsSimpleDNSEnabled);
+            .ToProperty(this, x => x.IsSimpleDNSEnabled);
 
         _ = Init();
     }

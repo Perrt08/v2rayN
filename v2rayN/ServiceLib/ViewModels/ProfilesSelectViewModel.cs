@@ -1,17 +1,13 @@
 namespace ServiceLib.ViewModels;
 
-public class ProfilesSelectViewModel : MyReactiveObject
+public partial class ProfilesSelectViewModel : MyReactiveObject
 {
     #region private prop
 
-    private string _serverFilter = string.Empty;
     private Dictionary<string, bool> _dicHeaderSort = new();
     private string _subIndexId = string.Empty;
 
     // ConfigType filter state: default include-mode with all types selected
-    private List<EConfigType> _filterConfigTypes = new();
-
-    private bool _filterExclude = false;
 
     #endregion private prop
 
@@ -22,29 +18,22 @@ public class ProfilesSelectViewModel : MyReactiveObject
     public IObservableCollection<SubItem> SubItems { get; } = new ObservableCollectionExtended<SubItem>();
 
     [Reactive]
-    public ProfileItemModel SelectedProfile { get; set; }
+    public partial ProfileItemModel SelectedProfile { get; set; }
 
     public IList<ProfileItemModel> SelectedProfiles { get; set; }
 
     [Reactive]
-    public SubItem SelectedSub { get; set; }
+    public partial SubItem SelectedSub { get; set; }
 
     [Reactive]
-    public string ServerFilter { get; set; }
+    public partial string ServerFilter { get; set; }
 
     // Include/Exclude filter for ConfigType
-    public List<EConfigType> FilterConfigTypes
-    {
-        get => _filterConfigTypes;
-        set => this.RaiseAndSetIfChanged(ref _filterConfigTypes, value);
-    }
+    [Reactive]
+    public List<EConfigType> FilterConfigTypes { get; set; } = new();
 
     [Reactive]
-    public bool FilterExclude
-    {
-        get => _filterExclude;
-        set => this.RaiseAndSetIfChanged(ref _filterExclude, value);
-    }
+    public partial bool FilterExclude { get; set; }
 
     #endregion ObservableCollection
 
@@ -63,12 +52,11 @@ public class ProfilesSelectViewModel : MyReactiveObject
             y => y != null && !y.Remarks.IsNullOrEmpty() && _subIndexId != y.Id)
                 .Subscribe(async c => await SubSelectedChangedAsync(c));
 
-        this.WhenAnyValue(
-          x => x.ServerFilter,
-          y => y != null && _serverFilter != y)
-              .Subscribe(async c => await ServerFilterChanged(c));
-
         // React to ConfigType filter changes
+        this.WhenAnyValue(x => x.ServerFilter)
+            .Skip(1)
+            .Subscribe(async _ => await RefreshServersBiz());
+            
         this.WhenAnyValue(x => x.FilterExclude)
             .Skip(1)
             .Subscribe(async _ => await RefreshServersBiz());
@@ -136,19 +124,6 @@ public class ProfilesSelectViewModel : MyReactiveObject
         await RefreshServers();
 
         await _updateView?.Invoke(EViewAction.ProfilesFocus, null);
-    }
-
-    private async Task ServerFilterChanged(bool c)
-    {
-        if (!c)
-        {
-            return;
-        }
-        _serverFilter = ServerFilter;
-        if (_serverFilter.IsNullOrEmpty())
-        {
-            await RefreshServers();
-        }
     }
 
     public async Task RefreshServers()

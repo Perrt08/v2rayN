@@ -1,11 +1,10 @@
 namespace ServiceLib.ViewModels;
 
-public class ProfilesViewModel : MyReactiveObject
+public partial class ProfilesViewModel : MyReactiveObject
 {
     #region private prop
 
     private List<ProfileItem> _lstProfile;
-    private string _serverFilter = string.Empty;
     private Dictionary<string, bool> _dicHeaderSort = new();
     private SpeedtestService? _speedtestService;
 
@@ -18,18 +17,18 @@ public class ProfilesViewModel : MyReactiveObject
     public IObservableCollection<SubItem> SubItems { get; } = new ObservableCollectionExtended<SubItem>();
 
     [Reactive]
-    public ProfileItemModel SelectedProfile { get; set; }
+    public partial ProfileItemModel SelectedProfile { get; set; }
 
     public IList<ProfileItemModel> SelectedProfiles { get; set; }
 
     [Reactive]
-    public SubItem SelectedSub { get; set; }
+    public partial SubItem SelectedSub { get; set; }
 
     [Reactive]
-    public SubItem SelectedMoveToGroup { get; set; }
+    public partial SubItem SelectedMoveToGroup { get; set; }
 
     [Reactive]
-    public string ServerFilter { get; set; }
+    public partial string ServerFilter { get; set; }
 
     #endregion ObservableCollection
 
@@ -102,10 +101,9 @@ public class ProfilesViewModel : MyReactiveObject
              y => y != null && !y.Remarks.IsNullOrEmpty())
                  .Subscribe(async c => await MoveToGroup(c));
 
-        this.WhenAnyValue(
-          x => x.ServerFilter,
-          y => y != null && _serverFilter != y)
-              .Subscribe(async c => await ServerFilterChanged(c));
+        this.WhenAnyValue(x => x.ServerFilter)
+            .Skip(1)
+            .Subscribe(async _ => await RefreshServersBiz());
 
         //servers delete
         EditServerCmd = ReactiveCommand.CreateFromTask(async () =>
@@ -350,19 +348,6 @@ public class ProfilesViewModel : MyReactiveObject
         await RefreshServers();
 
         await _updateView?.Invoke(EViewAction.ProfilesFocus, null);
-    }
-
-    private async Task ServerFilterChanged(bool c)
-    {
-        if (!c)
-        {
-            return;
-        }
-        _serverFilter = ServerFilter;
-        if (_serverFilter.IsNullOrEmpty())
-        {
-            await RefreshServers();
-        }
     }
 
     public async Task RefreshServers()
