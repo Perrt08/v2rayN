@@ -20,11 +20,6 @@ public partial class GlobalHotkeySettingWindow : WindowBase<GlobalHotkeySettingV
         this.Closing += (s, e) => HotkeyManager.Instance.IsPause = false;
         btnCancel.Click += (s, e) => this.Close();
 
-        this.WhenActivated(disposables =>
-        {
-            this.BindCommand(ViewModel, vm => vm.SaveCmd, v => v.btnSave).DisposeWith(disposables);
-        });
-
         Init();
         BindingData();
     }

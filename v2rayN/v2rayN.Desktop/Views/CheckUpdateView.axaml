@@ -31,12 +31,14 @@
                 <ToggleSwitch
                     x:Name="togEnableCheckPreReleaseUpdate"
                     Margin="{StaticResource Margin4}"
-                    HorizontalAlignment="Left" />
+                    HorizontalAlignment="Left"
+                    IsChecked="{Binding EnableCheckPreReleaseUpdate}" />
 
                 <Button
                     x:Name="btnCheckUpdate"
                     Width="100"
                     Margin="{StaticResource Margin4}"
+                    Command="{Binding CheckUpdateCmd}"
                     Content="{x:Static resx:ResUI.menuCheckUpdate}" />
             </StackPanel>
         </Border>

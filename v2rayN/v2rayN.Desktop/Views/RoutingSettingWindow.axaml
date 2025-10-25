@@ -21,8 +21,8 @@
             Orientation="Horizontal"
             Spacing="4">
             <Menu>
-                <MenuItem x:Name="menuRoutingAdvancedAdd2" Header="{x:Static resx:ResUI.menuRoutingAdvancedAdd}" />
-                <MenuItem x:Name="menuRoutingAdvancedImportRules2" Header="{x:Static resx:ResUI.menuRoutingAdvancedImportRules}" />
+                <MenuItem x:Name="menuRoutingAdvancedAdd2" Command="{Binding RoutingAdvancedAddCmd}" Header="{x:Static resx:ResUI.menuRoutingAdvancedAdd}" />
+                <MenuItem x:Name="menuRoutingAdvancedImportRules2" Command="{Binding RoutingAdvancedImportRulesCmd}" Header="{x:Static resx:ResUI.menuRoutingAdvancedImportRules}" />
             </Menu>
         </StackPanel>
 
@@ -34,6 +34,7 @@
             <Button
                 x:Name="btnSave"
                 Width="100"
+                Command="{Binding SaveCmd}"
                 Content="{x:Static resx:ResUI.TbConfirm}"
                 IsDefault="True" />
             <Button
@@ -66,7 +67,8 @@
                 Width="300"
                 Margin="{StaticResource Margin4}"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center"
+                SelectedValue="{Binding DomainStrategy}" />
 
             <TextBlock
                 Grid.Row="1"
@@ -84,7 +86,8 @@
                 Width="300"
                 Margin="{StaticResource Margin4}"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center"
+                SelectedValue="{Binding DomainStrategy4Singbox}" />
         </Grid>
 
         <TabControl x:Name="tabAdvanced">
@@ -98,18 +101,19 @@
                     GridLinesVisibility="All"
                     HeadersVisibility="Column"
                     IsReadOnly="True"
-                    ItemsSource="{Binding RoutingItems}">
+                    ItemsSource="{Binding RoutingItems}"
+                    SelectedItem="{Binding SelectedSource}">
                     <DataGrid.KeyBindings>
                         <KeyBinding Command="{Binding RoutingAdvancedSetDefaultCmd}" Gesture="Enter" />
                     </DataGrid.KeyBindings>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem x:Name="menuRoutingAdvancedAdd" Header="{x:Static resx:ResUI.menuRoutingAdvancedAdd}" />
-                            <MenuItem x:Name="menuRoutingAdvancedRemove" Header="{x:Static resx:ResUI.menuRoutingAdvancedRemove}" />
+                            <MenuItem x:Name="menuRoutingAdvancedAdd" Command="{Binding RoutingAdvancedAddCmd}" Header="{x:Static resx:ResUI.menuRoutingAdvancedAdd}" />
+                            <MenuItem x:Name="menuRoutingAdvancedRemove" Command="{Binding RoutingAdvancedRemoveCmd}" Header="{x:Static resx:ResUI.menuRoutingAdvancedRemove}" />
                             <MenuItem x:Name="menuRoutingAdvancedSelectAll" Header="{x:Static resx:ResUI.menuSelectAll}" />
-                            <MenuItem x:Name="menuRoutingAdvancedSetDefault" Header="{x:Static resx:ResUI.menuRoutingAdvancedSetDefault}" />
+                            <MenuItem x:Name="menuRoutingAdvancedSetDefault" Command="{Binding RoutingAdvancedSetDefaultCmd}" Header="{x:Static resx:ResUI.menuRoutingAdvancedSetDefault}" />
                             <Separator />
-                            <MenuItem x:Name="menuRoutingAdvancedImportRules" Header="{x:Static resx:ResUI.menuRoutingAdvancedImportRules}" />
+                            <MenuItem x:Name="menuRoutingAdvancedImportRules" Command="{Binding RoutingAdvancedImportRulesCmd}" Header="{x:Static resx:ResUI.menuRoutingAdvancedImportRules}" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
 

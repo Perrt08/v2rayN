@@ -21,6 +21,7 @@
             <Button
                 x:Name="btnSave"
                 Width="100"
+                Command="{Binding SaveCmd}"
                 Content="{x:Static resx:ResUI.TbConfirm}"
                 IsDefault="True" />
             <Button
@@ -53,6 +54,7 @@
                     Grid.Column="1"
                     Margin="{StaticResource Margin4}"
                     VerticalAlignment="Center"
+                    Text="{Binding SelectedSource.Remarks}"
                     TextWrapping="Wrap" />
 
                 <TextBlock
@@ -67,6 +69,7 @@
                     Grid.Column="1"
                     Margin="{StaticResource Margin4}"
                     VerticalAlignment="Center"
+                    Text="{Binding SelectedSource.Url}"
                     TextWrapping="Wrap"
                     Watermark="{x:Static resx:ResUI.SubUrlTips}" />
                 <Button
@@ -98,6 +101,7 @@
                                     VerticalAlignment="Center"
                                     Classes="TextArea"
                                     MinLines="4"
+                                    Text="{Binding SelectedSource.MoreUrl}"
                                     TextWrapping="Wrap"
                                     Watermark="{x:Static resx:ResUI.SubUrlTips}" />
                             </StackPanel>
@@ -120,12 +124,14 @@
                         x:Name="togEnable"
                         Margin="{StaticResource Margin4}"
                         HorizontalAlignment="Center"
-                        DockPanel.Dock="Left" />
+                        DockPanel.Dock="Left"
+                        IsChecked="{Binding SelectedSource.Enabled}" />
 
                     <TextBox
                         x:Name="txtAutoUpdateInterval"
                         Width="100"
                         Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.AutoUpdateInterval}"
                         VerticalAlignment="Center"
                         DockPanel.Dock="Right"
                         Watermark="{x:Static resx:ResUI.SubUrlTips}" />
@@ -149,6 +155,7 @@
                     Grid.Column="1"
                     Margin="{StaticResource Margin4}"
                     VerticalAlignment="Center"
+                    Text="{Binding SelectedSource.Filter}"
                     Watermark="{x:Static resx:ResUI.SubUrlTips}" />
 
                 <TextBlock
@@ -163,6 +170,7 @@
                     Grid.Column="1"
                     Width="200"
                     Margin="{StaticResource Margin4}"
+                    SelectedValue="{Binding SelectedSource.ConvertTarget}"
                     ToolTip.Tip="{x:Static resx:ResUI.LvConvertTargetTip}" />
 
                 <TextBlock
@@ -177,6 +185,7 @@
                     Grid.Column="1"
                     Margin="{StaticResource Margin4}"
                     VerticalAlignment="Center"
+                    Text="{Binding SelectedSource.UserAgent}"
                     TextWrapping="Wrap"
                     Watermark="{x:Static resx:ResUI.SubUrlTips}" />
 
@@ -192,7 +201,8 @@
                     Grid.Column="1"
                     Width="100"
                     Margin="{StaticResource Margin4}"
-                    HorizontalAlignment="Left" />
+                    HorizontalAlignment="Left"
+                    Text="{Binding SelectedSource.Sort}" />
 
                 <TextBlock
                     Grid.Row="9"
@@ -206,6 +216,7 @@
                     Grid.Column="1"
                     Margin="{StaticResource Margin4}"
                     VerticalAlignment="Center"
+                    Text="{Binding SelectedSource.PrevProfile}"
                     Watermark="{x:Static resx:ResUI.LvPrevProfileTip}" />
                 <Button
                     Grid.Row="9"
@@ -226,6 +237,7 @@
                     Grid.Column="1"
                     Margin="{StaticResource Margin4}"
                     VerticalAlignment="Center"
+                    Text="{Binding SelectedSource.NextProfile}"
                     Watermark="{x:Static resx:ResUI.LvPrevProfileTip}" />
                 <Button
                     Grid.Row="10"
@@ -247,6 +259,7 @@
                     Width="200"
                     Margin="{StaticResource Margin4}"
                     HorizontalAlignment="Left"
+                    Text="{Binding SelectedSource.PreSocksPort}"
                     ToolTip.Tip="{x:Static resx:ResUI.TipPreSocksPort}"
                     Watermark="{x:Static resx:ResUI.TipPreSocksPort}" />
 
@@ -262,6 +275,7 @@
                     Grid.Column="1"
                     Margin="{StaticResource Margin4}"
                     VerticalAlignment="Center"
+                    Text="{Binding SelectedSource.Memo}"
                     TextWrapping="Wrap" />
 
             </Grid>

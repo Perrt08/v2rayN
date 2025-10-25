@@ -19,10 +19,10 @@
             DockPanel.Dock="Top"
             Orientation="Horizontal">
             <Menu>
-                <MenuItem x:Name="menuRuleAdd" Header="{x:Static resx:ResUI.menuRuleAdd}" />
-                <MenuItem x:Name="menuImportRulesFromFile" Header="{x:Static resx:ResUI.menuImportRulesFromFile}" />
-                <MenuItem x:Name="menuImportRulesFromClipboard" Header="{x:Static resx:ResUI.menuImportRulesFromClipboard}" />
-                <MenuItem x:Name="menuImportRulesFromUrl" Header="{x:Static resx:ResUI.menuImportRulesFromUrl}" />
+                <MenuItem x:Name="menuRuleAdd" Command="{Binding RuleAddCmd}" Header="{x:Static resx:ResUI.menuRuleAdd}" />
+                <MenuItem x:Name="menuImportRulesFromFile" Command="{Binding ImportRulesFromFileCmd}" Header="{x:Static resx:ResUI.menuImportRulesFromFile}" />
+                <MenuItem x:Name="menuImportRulesFromClipboard" Command="{Binding ImportRulesFromClipboardCmd}" Header="{x:Static resx:ResUI.menuImportRulesFromClipboard}" />
+                <MenuItem x:Name="menuImportRulesFromUrl" Command="{Binding ImportRulesFromUrlCmd}" Header="{x:Static resx:ResUI.menuImportRulesFromUrl}" />
             </Menu>
         </StackPanel>
 
@@ -34,6 +34,7 @@
             <Button
                 x:Name="btnSave"
                 Width="100"
+                Command="{Binding SaveCmd}"
                 Content="{x:Static resx:ResUI.TbConfirm}"
                 IsDefault="True" />
             <Button
@@ -67,6 +68,7 @@
                     Width="300"
                     Margin="{StaticResource Margin4}"
                     HorizontalAlignment="Left"
+                    Text="{Binding SelectedRouting.Remarks}"
                     VerticalAlignment="Center"
                     TextWrapping="Wrap" />
 
@@ -78,7 +80,8 @@
                     x:Name="txtSort"
                     Width="100"
                     Margin="{StaticResource Margin4}"
-                    HorizontalAlignment="Left" />
+                    HorizontalAlignment="Left"
+                    Text="{Binding SelectedRouting.Sort}" />
             </StackPanel>
 
             <TextBlock
@@ -94,7 +97,8 @@
                 <ComboBox
                     x:Name="cmbdomainStrategy"
                     Width="200"
-                    Margin="{StaticResource Margin4}" />
+                    Margin="{StaticResource Margin4}"
+                    SelectedValue="{Binding SelectedRouting.DomainStrategy}" />
                 <TextBlock
                     Margin="{StaticResource Margin4}"
                     VerticalAlignment="Center"
@@ -102,7 +106,8 @@
                 <ComboBox
                     x:Name="cmbdomainStrategy4Singbox"
                     Width="200"
-                    Margin="{StaticResource Margin4}" />
+                    Margin="{StaticResource Margin4}"
+                    SelectedValue="{Binding SelectedRouting.DomainStrategy4Singbox}" />
             </StackPanel>
 
             <TextBlock
@@ -118,6 +123,7 @@
                 Width="600"
                 Margin="{StaticResource Margin4}"
                 HorizontalAlignment="Left"
+                Text="{Binding SelectedRouting.Url}"
                 VerticalAlignment="Center"
                 TextWrapping="Wrap" />
 
@@ -161,6 +167,7 @@
                 Width="600"
                 Margin="{StaticResource Margin4}"
                 HorizontalAlignment="Left"
+                Text="{Binding SelectedRouting.CustomRulesetPath4Singbox}"
                 VerticalAlignment="Center"
                 TextWrapping="Wrap" />
             <Button
@@ -182,21 +189,22 @@
                     GridLinesVisibility="All"
                     HeadersVisibility="Column"
                     IsReadOnly="True"
-                    ItemsSource="{Binding RulesItems}">
+                    ItemsSource="{Binding RulesItems}"
+                    SelectedItem="{Binding SelectedSource}">
                     <DataGrid.KeyBindings>
                         <KeyBinding Command="{Binding RuleExportSelectedCmd}" Gesture="Ctrl+C" />
                     </DataGrid.KeyBindings>
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem x:Name="menuRuleAdd2" Header="{x:Static resx:ResUI.menuRuleAdd}" />
-                            <MenuItem x:Name="menuRuleRemove" Header="{x:Static resx:ResUI.menuRuleRemove}" />
+                            <MenuItem x:Name="menuRuleAdd2" Command="{Binding RuleAddCmd}" Header="{x:Static resx:ResUI.menuRuleAdd}" />
+                            <MenuItem x:Name="menuRuleRemove" Command="{Binding RuleRemoveCmd}" Header="{x:Static resx:ResUI.menuRuleRemove}" />
                             <MenuItem x:Name="menuRuleSelectAll" Header="{x:Static resx:ResUI.menuSelectAll}" />
-                            <MenuItem x:Name="menuRuleExportSelected" Header="{x:Static resx:ResUI.menuRuleExportSelected}" />
+                            <MenuItem x:Name="menuRuleExportSelected" Command="{Binding RuleExportSelectedCmd}" Header="{x:Static resx:ResUI.menuRuleExportSelected}" />
                             <Separator />
-                            <MenuItem x:Name="menuMoveTop" Header="{x:Static resx:ResUI.menuMoveTop}" />
-                            <MenuItem x:Name="menuMoveUp" Header="{x:Static resx:ResUI.menuMoveUp}" />
-                            <MenuItem x:Name="menuMoveDown" Header="{x:Static resx:ResUI.menuMoveDown}" />
-                            <MenuItem x:Name="menuMoveBottom" Header="{x:Static resx:ResUI.menuMoveBottom}" />
+                            <MenuItem x:Name="menuMoveTop" Command="{Binding MoveTopCmd}" Header="{x:Static resx:ResUI.menuMoveTop}" />
+                            <MenuItem x:Name="menuMoveUp" Command="{Binding MoveUpCmd}" Header="{x:Static resx:ResUI.menuMoveUp}" />
+                            <MenuItem x:Name="menuMoveDown" Command="{Binding MoveDownCmd}" Header="{x:Static resx:ResUI.menuMoveDown}" />
+                            <MenuItem x:Name="menuMoveBottom" Command="{Binding MoveBottomCmd}" Header="{x:Static resx:ResUI.menuMoveBottom}" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                     <DataGrid.Columns>

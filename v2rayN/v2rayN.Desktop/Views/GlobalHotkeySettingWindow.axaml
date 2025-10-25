@@ -27,6 +27,7 @@
             <Button
                 x:Name="btnSave"
                 Width="100"
+                Command="{Binding SaveCmd}"
                 Content="{x:Static resx:ResUI.TbConfirm}"
                 IsDefault="True" />
             <Button

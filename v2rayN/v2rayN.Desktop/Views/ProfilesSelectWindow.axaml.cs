@@ -28,15 +28,6 @@ public partial class ProfilesSelectWindow : WindowBase<ProfilesSelectViewModel>
         ViewModel = new ProfilesSelectViewModel(UpdateViewHandler);
         DataContext = ViewModel;
 
-        this.WhenActivated(disposables =>
-        {
-            this.OneWayBind(ViewModel, vm => vm.ProfileItems, v => v.lstProfiles.ItemsSource).DisposeWith(disposables);
-            this.Bind(ViewModel, vm => vm.SelectedProfile, v => v.lstProfiles.SelectedItem).DisposeWith(disposables);
-
-            this.Bind(ViewModel, vm => vm.SelectedSub, v => v.lstGroup.SelectedItem).DisposeWith(disposables);
-            this.Bind(ViewModel, vm => vm.ServerFilter, v => v.txtServerFilter.Text).DisposeWith(disposables);
-        });
-
         btnCancel.Click += (s, e) => Close(false);
     }
 

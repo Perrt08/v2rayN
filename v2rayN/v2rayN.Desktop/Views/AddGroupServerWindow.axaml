@@ -24,6 +24,7 @@
                 x:Name="btnSave"
                 Width="100"
                 Content="{x:Static resx:ResUI.TbConfirm}"
+                Command="{Binding SaveCmd}"
                 IsDefault="True" />
             <Button
                 x:Name="btnCancel"
@@ -56,7 +57,8 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     Width="400"
-                    Margin="{StaticResource Margin4}" />
+                    Margin="{StaticResource Margin4}"
+                    Text="{Binding SelectedSource.Remarks}" />
 
                 <TextBlock
                     Grid.Row="2"
@@ -69,7 +71,8 @@
                     Grid.Row="2"
                     Grid.Column="1"
                     Width="200"
-                    Margin="{StaticResource Margin4}" />
+                    Margin="{StaticResource Margin4}"
+                    SelectedValue="{Binding CoreType}" />
 
                 <Grid
                     x:Name="gridPolicyGroup"
@@ -86,7 +89,8 @@
                         x:Name="cmbPolicyGroupType"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding PolicyGroupType}" />
                 </Grid>
             </Grid>
         </Grid>
@@ -105,17 +109,18 @@
                     HeadersVisibility="Column"
                     IsReadOnly="True"
                     ItemsSource="{Binding ChildItemsObs}"
+                    SelectedItem="{Binding SelectedChild}"
                     SelectionMode="Extended">
                     <DataGrid.ContextMenu>
                         <ContextMenu>
                             <MenuItem x:Name="menuAddChildServer" Header="{x:Static resx:ResUI.menuAddChildServer}" />
-                            <MenuItem x:Name="menuRemoveChildServer" Header="{x:Static resx:ResUI.menuRemoveChildServer}" />
+                            <MenuItem x:Name="menuRemoveChildServer" Header="{x:Static resx:ResUI.menuRemoveChildServer}" Command="{Binding RemoveCmd}" />
                             <MenuItem x:Name="menuSelectAllChild" Header="{x:Static resx:ResUI.menuSelectAll}" />
                             <Separator />
-                            <MenuItem x:Name="menuMoveTop" Header="{x:Static resx:ResUI.menuMoveTop}" />
-                            <MenuItem x:Name="menuMoveUp" Header="{x:Static resx:ResUI.menuMoveUp}" />
-                            <MenuItem x:Name="menuMoveDown" Header="{x:Static resx:ResUI.menuMoveDown}" />
-                            <MenuItem x:Name="menuMoveBottom" Header="{x:Static resx:ResUI.menuMoveBottom}" />
+                            <MenuItem x:Name="menuMoveTop" Header="{x:Static resx:ResUI.menuMoveTop}" Command="{Binding MoveTopCmd}" />
+                            <MenuItem x:Name="menuMoveUp" Header="{x:Static resx:ResUI.menuMoveUp}" Command="{Binding MoveUpCmd}" />
+                            <MenuItem x:Name="menuMoveDown" Header="{x:Static resx:ResUI.menuMoveDown}" Command="{Binding MoveDownCmd}" />
+                            <MenuItem x:Name="menuMoveBottom" Header="{x:Static resx:ResUI.menuMoveBottom}" Command="{Binding MoveBottomCmd}" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                     <DataGrid.Columns>

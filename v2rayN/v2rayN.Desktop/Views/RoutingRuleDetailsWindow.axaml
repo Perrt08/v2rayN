@@ -31,7 +31,8 @@
                 Grid.Column="1"
                 Width="300"
                 Margin="{StaticResource Margin4}"
-                HorizontalAlignment="Left" />
+                HorizontalAlignment="Left"
+                Text="{Binding SelectedSource.Remarks}" />
             <StackPanel
                 Grid.Row="0"
                 Grid.Column="2"
@@ -43,6 +44,7 @@
                     x:Name="togEnabled"
                     Margin="{StaticResource Margin4}"
                     HorizontalAlignment="Left"
+                    IsChecked="{Binding SelectedSource.Enabled}"
                     VerticalAlignment="Center" />
 
             </StackPanel>
@@ -59,7 +61,8 @@
                 Grid.Column="1"
                 Width="300"
                 Margin="{StaticResource Margin4}"
-                MaxDropDownHeight="1000" />
+                MaxDropDownHeight="1000"
+                SelectedValue="{Binding RuleType}" />
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="2"
@@ -80,7 +83,8 @@
                 Grid.Column="1"
                 Width="300"
                 Margin="{StaticResource Margin4}"
-                IsEditable="True" />
+                IsEditable="True"
+                Text="{Binding SelectedSource.OutboundTag}" />
             <StackPanel
                 Grid.Row="2"
                 Grid.Column="2"
@@ -108,7 +112,8 @@
                 Grid.Column="1"
                 Width="300"
                 Margin="{StaticResource Margin4}"
-                HorizontalAlignment="Left" />
+                HorizontalAlignment="Left"
+                Text="{Binding SelectedSource.Port}" />
             <TextBlock
                 Grid.Row="3"
                 Grid.Column="2"
@@ -174,7 +179,8 @@
                 Grid.Column="1"
                 Width="300"
                 Margin="{StaticResource Margin4}"
-                MaxDropDownHeight="1000" />
+                MaxDropDownHeight="1000"
+                SelectedValue="{Binding SelectedSource.Network}" />
             <TextBlock
                 Grid.Row="6"
                 Grid.Column="2"
@@ -193,13 +199,14 @@
                 Width="600"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
-                <CheckBox x:Name="chkAutoSort">
+                <CheckBox x:Name="chkAutoSort" IsChecked="{Binding AutoSort}">
                     <TextBlock Text="{x:Static resx:ResUI.TbAutoSort}" />
                 </CheckBox>
             </StackPanel>
             <Button
                 x:Name="btnSave"
                 Width="100"
+                Command="{Binding SaveCmd}"
                 Content="{x:Static resx:ResUI.TbConfirm}"
                 IsDefault="True" />
             <Button
@@ -221,6 +228,7 @@
                     VerticalAlignment="Stretch"
                     Classes="TextArea"
                     MinLines="10"
+                    Text="{Binding Domain}"
                     TextWrapping="Wrap" />
             </HeaderedContentControl>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" />
@@ -234,6 +242,7 @@
                     VerticalAlignment="Stretch"
                     Classes="TextArea"
                     MinLines="10"
+                    Text="{Binding IP}"
                     TextWrapping="Wrap" />
             </HeaderedContentControl>
             <GridSplitter Grid.Column="3" HorizontalAlignment="Stretch" />
@@ -247,6 +256,7 @@
                     VerticalAlignment="Stretch"
                     Classes="TextArea"
                     MinLines="10"
+                    Text="{Binding Process}"
                     TextWrapping="Wrap" />
             </HeaderedContentControl>
         </Grid>

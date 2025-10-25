@@ -19,7 +19,8 @@
             <TextBlock
                 Name="txtMsg"
                 HorizontalAlignment="Left"
-                Margin="{StaticResource Margin4}" />
+                Margin="{StaticResource Margin4}"
+                Text="{Binding OperationMsg}" />
         </StackPanel>
 
         <StackPanel>
@@ -114,6 +115,7 @@
                                                 Grid.Column="1"
                                                 VerticalAlignment="Center"
                                                 Margin="{StaticResource Margin4}"
+                                                Text="{Binding SelectedSource.Url}"
                                                 TextWrapping="Wrap" />
 
                                             <TextBlock
@@ -128,7 +130,8 @@
                                                 Grid.Row="1"
                                                 Grid.Column="1"
                                                 VerticalAlignment="Center"
-                                                Margin="{StaticResource Margin4}" />
+                                                Margin="{StaticResource Margin4}"
+                                                Text="{Binding SelectedSource.UserName}" />
 
                                             <TextBlock
                                                 Grid.Row="2"
@@ -142,7 +145,8 @@
                                                 Grid.Row="2"
                                                 Grid.Column="1"
                                                 VerticalAlignment="Center"
-                                                Margin="{StaticResource Margin4}" />
+                                                Margin="{StaticResource Margin4}"
+                                                Text="{Binding SelectedSource.Password}" />
 
                                             <TextBlock
                                                 Grid.Row="3"
@@ -156,7 +160,8 @@
                                                 Grid.Row="3"
                                                 Grid.Column="1"
                                                 VerticalAlignment="Center"
-                                                Margin="{StaticResource Margin4}" />
+                                                Margin="{StaticResource Margin4}"
+                                                Text="{Binding SelectedSource.DirName}" />
 
                                             <Button
                                                 x:Name="menuWebDavCheck"
@@ -165,6 +170,7 @@
                                                 HorizontalAlignment="Right"
                                                 VerticalAlignment="Center"
                                                 Margin="{StaticResource Margin4}"
+                                                Command="{Binding WebDavCheckCmd}"
                                                 Content="{x:Static resx:ResUI.LvWebDavCheck}" />
                                         </Grid>
                                     </StackPanel>
@@ -186,6 +192,7 @@
                         Grid.Column="1"
                         VerticalAlignment="Center"
                         Margin="{StaticResource Margin4}"
+                        Command="{Binding RemoteBackupCmd}"
                         Content="{x:Static resx:ResUI.menuRemoteBackup}" />
 
                     <Separator
@@ -205,6 +212,7 @@
                         Grid.Column="1"
                         VerticalAlignment="Center"
                         Margin="{StaticResource Margin4}"
+                        Command="{Binding RemoteRestoreCmd}"
                         Content="{x:Static resx:ResUI.menuRemoteRestore}" />
                 </Grid>
             </Border>

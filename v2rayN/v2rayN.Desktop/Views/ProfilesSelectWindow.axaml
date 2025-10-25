@@ -41,6 +41,7 @@
                         Margin="{StaticResource MarginLr4}"
                         DisplayMemberBinding="{Binding Remarks}"
                         ItemsSource="{Binding SubItems}"
+                        SelectedItem="{Binding SelectedSub}"
                         Theme="{DynamicResource ButtonRadioGroupListBox}">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -79,6 +80,7 @@
                     HeadersVisibility="All"
                     IsReadOnly="True"
                     ItemsSource="{Binding ProfileItems}"
+                    SelectedItem="{Binding SelectedProfile}"
                     SelectionMode="Single">
                     <DataGrid.KeyBindings>
                         <KeyBinding Command="{Binding SelectFinish}" Gesture="Enter" />

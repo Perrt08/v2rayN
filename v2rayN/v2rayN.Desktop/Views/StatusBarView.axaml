@@ -16,18 +16,18 @@
                 VerticalAlignment="Center"
                 Margin="{StaticResource MarginLr8}"
                 DockPanel.Dock="Right">
-                <TextBlock x:Name="txtSpeedProxyDisplay" HorizontalAlignment="Right" />
+                <TextBlock x:Name="txtSpeedProxyDisplay" HorizontalAlignment="Right" Text="{Binding SpeedProxyDisplay}" />
                 <Border Margin="1" />
-                <TextBlock x:Name="txtSpeedDirectDisplay" HorizontalAlignment="Right" />
+                <TextBlock x:Name="txtSpeedDirectDisplay" HorizontalAlignment="Right" Text="{Binding SpeedDirectDisplay}" />
             </StackPanel>
 
             <StackPanel
                 VerticalAlignment="Center"
                 Margin="{StaticResource MarginLr8}"
                 DockPanel.Dock="Left">
-                <TextBlock x:Name="txtInboundDisplay" />
+                <TextBlock x:Name="txtInboundDisplay" Text="{Binding InboundDisplay}" />
                 <Border Margin="1" />
-                <TextBlock x:Name="txtInboundLanDisplay" />
+                <TextBlock x:Name="txtInboundLanDisplay" Text="{Binding InboundLanDisplay}" />
             </StackPanel>
 
             <StackPanel
@@ -44,6 +44,7 @@
                     x:Name="togEnableTun"
                     HorizontalAlignment="Center"
                     Margin="{StaticResource Margin4}"
+                    IsChecked="{Binding EnableTun}"
                     Theme="{DynamicResource SimpleToggleSwitch}" />
             </StackPanel>
 
@@ -56,6 +57,7 @@
                     x:Name="cmbSystemProxy"
                     Width="160"
                     Margin="{StaticResource MarginLr8}"
+                    SelectedIndex="{Binding SystemProxySelected}"
                     ToolTip.Tip="{x:Static resx:ResUI.menuSystemproxy}">
                     <ComboBoxItem Content="{x:Static resx:ResUI.menuSystemProxyClear}" />
                     <ComboBoxItem Content="{x:Static resx:ResUI.menuSystemProxySet}" />
@@ -69,13 +71,14 @@
                     Margin="{StaticResource MarginLr8}"
                     DisplayMemberBinding="{Binding Remarks}"
                     ItemsSource="{Binding RoutingItems}"
+                    SelectedItem="{Binding SelectedRouting}"
                     ToolTip.Tip="{x:Static resx:ResUI.menuRouting}" />
             </StackPanel>
 
             <StackPanel VerticalAlignment="Center" Margin="{StaticResource MarginLr8}">
-                <TextBlock x:Name="txtRunningServerDisplay" />
+                <TextBlock x:Name="txtRunningServerDisplay" Text="{Binding RunningServerDisplay}" />
                 <Border Margin="1" />
-                <TextBlock x:Name="txtRunningInfoDisplay" />
+                <TextBlock x:Name="txtRunningInfoDisplay" Text="{Binding RunningInfoDisplay}" />
             </StackPanel>
         </DockPanel>
     </Grid>

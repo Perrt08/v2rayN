@@ -25,10 +25,10 @@
                 DockPanel.Dock="Top"
                 Orientation="Horizontal">
                 <Menu>
-                    <MenuItem x:Name="menuSubAdd" Header="{x:Static resx:ResUI.menuSubAdd}" />
-                    <MenuItem x:Name="menuSubDelete" Header="{x:Static resx:ResUI.menuSubDelete}" />
-                    <MenuItem x:Name="menuSubEdit" Header="{x:Static resx:ResUI.menuSubEdit}" />
-                    <MenuItem x:Name="menuSubShare" Header="{x:Static resx:ResUI.menuSubShare}" />
+                    <MenuItem x:Name="menuSubAdd" Header="{x:Static resx:ResUI.menuSubAdd}" Command="{Binding SubAddCmd}" />
+                    <MenuItem x:Name="menuSubDelete" Header="{x:Static resx:ResUI.menuSubDelete}" Command="{Binding SubDeleteCmd}" />
+                    <MenuItem x:Name="menuSubEdit" Header="{x:Static resx:ResUI.menuSubEdit}" Command="{Binding SubEditCmd}" />
+                    <MenuItem x:Name="menuSubShare" Header="{x:Static resx:ResUI.menuSubShare}" Command="{Binding SubShareCmd}" />
                     <MenuItem x:Name="menuClose" Header="{x:Static resx:ResUI.menuClose}" />
                 </Menu>
             </StackPanel>
@@ -41,7 +41,8 @@
                 GridLinesVisibility="All"
                 HeadersVisibility="Column"
                 IsReadOnly="True"
-                ItemsSource="{Binding SubItems}">
+                ItemsSource="{Binding SubItems}"
+                SelectedItem="{Binding SelectedSource}">
                 <DataGrid.KeyBindings>
                     <KeyBinding Command="{Binding SubDeleteCmd}" Gesture="Delete" />
                 </DataGrid.KeyBindings>

@@ -29,7 +29,8 @@
             <ComboBox
                 x:Name="cmbRulemode"
                 Width="100"
-                Margin="{StaticResource MarginLr8}">
+                Margin="{StaticResource MarginLr8}"
+                SelectedIndex="{Binding RuleModeSelected}">
                 <ComboBoxItem Content="{x:Static resx:ResUI.menuModeRule}" />
                 <ComboBoxItem Content="{x:Static resx:ResUI.menuModeGlobal}" />
                 <ComboBoxItem Content="{x:Static resx:ResUI.menuModeDirect}" />
@@ -42,7 +43,8 @@
             <ComboBox
                 x:Name="cmbSorting"
                 Width="100"
-                Margin="{StaticResource MarginLr8}">
+                Margin="{StaticResource MarginLr8}"
+                SelectedIndex="{Binding SortingSelected}">
                 <ComboBoxItem Content="{x:Static resx:ResUI.TbSortingDelay}" />
                 <ComboBoxItem Content="{x:Static resx:ResUI.TbSortingName}" />
                 <ComboBoxItem Content="{x:Static resx:ResUI.TbSortingDefault}" />
@@ -52,6 +54,7 @@
                 x:Name="menuProxiesReload"
                 Margin="{StaticResource MarginLr8}"
                 Classes="IconButton Success"
+                Command="{Binding ProxiesReloadCmd}"
                 ToolTip.Tip="{x:Static resx:ResUI.menuProxiesReload}">
                 <Button.Content>
                     <PathIcon Data="{StaticResource SemiIconRefresh}" />
@@ -62,6 +65,7 @@
                 x:Name="menuProxiesDelaytest"
                 Margin="{StaticResource MarginLr8}"
                 Classes="IconButton Success"
+                Command="{Binding ProxiesDelayTestCmd}"
                 ToolTip.Tip="{x:Static resx:ResUI.menuProxiesDelaytest}">
                 <Button.Content>
                     <PathIcon Data="{StaticResource SemiIconBolt}" />
@@ -75,13 +79,15 @@
             <ToggleSwitch
                 x:Name="togAutoRefresh"
                 Margin="{StaticResource MarginLr8}"
-                HorizontalAlignment="Left" />
+                HorizontalAlignment="Left"
+                IsChecked="{Binding AutoRefresh}" />
         </WrapPanel>
         <DockPanel>
             <ListBox
                 x:Name="lstProxyGroups"
                 DockPanel.Dock="Left"
-                ItemsSource="{Binding ProxyGroups}">
+                ItemsSource="{Binding ProxyGroups}"
+                SelectedItem="{Binding SelectedGroup}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical" />
@@ -106,11 +112,11 @@
                 </ItemsControl.ItemTemplate>
             </ListBox>
 
-            <ListBox x:Name="lstProxyDetails" ItemsSource="{Binding ProxyDetails}">
+            <ListBox x:Name="lstProxyDetails" ItemsSource="{Binding ProxyDetails}" SelectedItem="{Binding SelectedDetail}">
                 <ItemsControl.ContextMenu>
                     <ContextMenu>
-                        <MenuItem x:Name="menuProxiesDelaytestPart" Header="{x:Static resx:ResUI.menuProxiesDelaytestPart}" />
-                        <MenuItem x:Name="menuProxiesSelectActivity" Header="{x:Static resx:ResUI.menuProxiesSelectActivity}" />
+                        <MenuItem x:Name="menuProxiesDelaytestPart" Header="{x:Static resx:ResUI.menuProxiesDelaytestPart}" Command="{Binding ProxiesDelayTestPartCmd}" />
+                        <MenuItem x:Name="menuProxiesSelectActivity" Header="{x:Static resx:ResUI.menuProxiesSelectActivity}" Command="{Binding ProxiesSelectActivityCmd}" />
                     </ContextMenu>
                 </ItemsControl.ContextMenu>
                 <ItemsControl.ItemsPanel>

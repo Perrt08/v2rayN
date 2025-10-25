@@ -12,12 +12,6 @@ public partial class MsgView : ReactiveUserControl<MsgViewModel>
         txtMsg.TextArea.TextView.Options.EnableHyperlinks = false;
         ViewModel = new MsgViewModel(UpdateViewHandler);
 
-        this.WhenActivated(disposables =>
-        {
-            this.Bind(ViewModel, vm => vm.MsgFilter, v => v.cmbMsgFilter.Text).DisposeWith(disposables);
-            this.Bind(ViewModel, vm => vm.AutoRefresh, v => v.togAutoRefresh.IsChecked).DisposeWith(disposables);
-        });
-
         TextEditorKeywordHighlighter.Attach(txtMsg, Global.LogLevelColors.ToDictionary(
                 kv => kv.Key,
                 kv => (IBrush)new SolidColorBrush(Color.Parse(kv.Value))

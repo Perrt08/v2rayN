@@ -22,6 +22,7 @@
             <Button
                 x:Name="btnSave"
                 Width="100"
+                Command="{Binding SaveCmd}"
                 Content="{x:Static resx:ResUI.TbConfirm}"
                 IsDefault="True" />
             <Button
@@ -61,7 +62,8 @@
                             <ToggleSwitch
                                 x:Name="rayFullConfigTemplateEnable"
                                 Margin="{StaticResource Margin4}"
-                                HorizontalAlignment="Left" />
+                                HorizontalAlignment="Left"
+                                IsChecked="{Binding EnableFullConfigTemplate4Ray}" />
                         </StackPanel>
                     </Grid>
 
@@ -74,7 +76,8 @@
                             <ToggleSwitch
                                 x:Name="togAddProxyProtocolOutboundOnly4Ray"
                                 Margin="{StaticResource Margin4}"
-                                HorizontalAlignment="Left" />
+                                HorizontalAlignment="Left"
+                                IsChecked="{Binding AddProxyOnly4Ray}" />
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -85,7 +88,8 @@
                             <TextBox
                                 x:Name="txtProxyDetour4Ray"
                                 Width="200"
-                                Margin="{StaticResource Margin4}" />
+                                Margin="{StaticResource Margin4}"
+                                Text="{Binding ProxyDetour4Ray}" />
                         </StackPanel>
                     </WrapPanel>
 
@@ -99,6 +103,7 @@
                             VerticalAlignment="Stretch"
                             Classes="TextArea"
                             MinLines="10"
+                            Text="{Binding FullConfigTemplate4Ray}"
                             TextWrapping="Wrap" />
                     </HeaderedContentControl>
                 </DockPanel>
@@ -131,7 +136,8 @@
                             <ToggleSwitch
                                 x:Name="sbFullConfigTemplateEnable"
                                 Margin="{StaticResource Margin4}"
-                                HorizontalAlignment="Left" />
+                                HorizontalAlignment="Left"
+                                IsChecked="{Binding EnableFullConfigTemplate4Singbox}" />
                         </StackPanel>
                     </Grid>
 
@@ -144,7 +150,8 @@
                             <ToggleSwitch
                                 x:Name="togAddProxyProtocolOutboundOnly4Singbox"
                                 Margin="{StaticResource Margin4}"
-                                HorizontalAlignment="Left" />
+                                HorizontalAlignment="Left"
+                                IsChecked="{Binding AddProxyOnly4Singbox}" />
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -155,7 +162,8 @@
                             <TextBox
                                 x:Name="txtProxyDetour4Singbox"
                                 Width="200"
-                                Margin="{StaticResource Margin4}" />
+                                Margin="{StaticResource Margin4}"
+                                Text="{Binding ProxyDetour4Singbox}" />
                         </StackPanel>
                     </WrapPanel>
 
@@ -171,6 +179,7 @@
                                 VerticalAlignment="Stretch"
                                 Classes="TextArea"
                                 MinLines="10"
+                                Text="{Binding FullConfigTemplate4Singbox}"
                                 TextWrapping="Wrap" />
                         </HeaderedContentControl>
 
@@ -186,6 +195,7 @@
                                 VerticalAlignment="Stretch"
                                 Classes="TextArea"
                                 MinLines="10"
+                                Text="{Binding FullTunConfigTemplate4Singbox}"
                                 TextWrapping="Wrap" />
                         </HeaderedContentControl>
                     </Grid>

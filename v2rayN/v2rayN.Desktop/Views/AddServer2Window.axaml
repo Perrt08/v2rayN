@@ -22,6 +22,7 @@
             <Button
                 x:Name="btnSave"
                 Width="100"
+                Command="{Binding SaveServerCmd}"
                 Content="{x:Static resx:ResUI.TbConfirm}"
                 IsDefault="True" />
             <Button
@@ -54,6 +55,7 @@
                     Width="400"
                     Margin="{StaticResource Margin4}"
                     HorizontalAlignment="Left"
+                    Text="{Binding SelectedSource.Remarks}"
                     VerticalAlignment="Center" />
 
                 <TextBlock
@@ -69,8 +71,9 @@
                     Width="400"
                     Margin="{StaticResource Margin4}"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    IsReadOnly="True" />
+                    IsReadOnly="True"
+                    Text="{Binding SelectedSource.Address}"
+                    VerticalAlignment="Center" />
                 <StackPanel
                     Grid.Row="2"
                     Grid.Column="2"
@@ -79,10 +82,12 @@
                     <Button
                         x:Name="btnBrowse"
                         Margin="{StaticResource MarginLr4}"
+                        Command="{Binding BrowseServerCmd}"
                         Content="{x:Static resx:ResUI.TbBrowse}" />
                     <Button
                         x:Name="btnEdit"
                         Margin="{StaticResource MarginLr4}"
+                        Command="{Binding EditServerCmd}"
                         Content="{x:Static resx:ResUI.TbEdit}" />
                 </StackPanel>
 
@@ -99,7 +104,8 @@
                     Width="200"
                     Margin="{StaticResource Margin4}"
                     HorizontalAlignment="Left"
-                    MaxDropDownHeight="1000" />
+                    MaxDropDownHeight="1000"
+                    SelectedValue="{Binding CoreType}" />
 
                 <TextBlock
                     Grid.Row="4"
@@ -115,7 +121,8 @@
                     <ToggleSwitch
                         x:Name="togDisplayLog"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        IsChecked="{Binding SelectedSource.DisplayLog}" />
                     <TextBlock
                         Margin="{StaticResource MarginLr8}"
                         VerticalAlignment="Center"
@@ -134,7 +141,8 @@
                     Grid.Column="1"
                     Width="200"
                     Margin="{StaticResource Margin4}"
-                    HorizontalAlignment="Left" />
+                    HorizontalAlignment="Left"
+                    Text="{Binding SelectedSource.PreSocksPort}" />
                 <StackPanel
                     Grid.Row="6"
                     Grid.Column="1"

@@ -19,17 +19,6 @@ public partial class SubSettingWindow : WindowBase<SubSettingViewModel>
         ViewModel = new SubSettingViewModel(UpdateViewHandler);
         lstSubscription.DoubleTapped += LstSubscription_DoubleTapped;
         lstSubscription.SelectionChanged += LstSubscription_SelectionChanged;
-
-        this.WhenActivated(disposables =>
-        {
-            this.OneWayBind(ViewModel, vm => vm.SubItems, v => v.lstSubscription.ItemsSource).DisposeWith(disposables);
-            this.Bind(ViewModel, vm => vm.SelectedSource, v => v.lstSubscription.SelectedItem).DisposeWith(disposables);
-
-            this.BindCommand(ViewModel, vm => vm.SubAddCmd, v => v.menuSubAdd).DisposeWith(disposables);
-            this.BindCommand(ViewModel, vm => vm.SubDeleteCmd, v => v.menuSubDelete).DisposeWith(disposables);
-            this.BindCommand(ViewModel, vm => vm.SubEditCmd, v => v.menuSubEdit).DisposeWith(disposables);
-            this.BindCommand(ViewModel, vm => vm.SubShareCmd, v => v.menuSubShare).DisposeWith(disposables);
-        });
     }
 
     private async Task<bool> UpdateViewHandler(EViewAction action, object? obj)

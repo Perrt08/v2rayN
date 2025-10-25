@@ -23,12 +23,14 @@
                 Width="200"
                 VerticalContentAlignment="Center"
                 Margin="{StaticResource MarginLr8}"
+                Text="{Binding HostFilter}"
                 Watermark="{x:Static resx:ResUI.ConnectionsHostFilterTitle}" />
 
             <Button
                 x:Name="btnConnectionCloseAll"
                 Classes="IconButton Success"
                 Margin="{StaticResource MarginLr8}"
+                Command="{Binding ConnectionCloseAllCmd}"
                 ToolTip.Tip="{x:Static resx:ResUI.menuConnectionCloseAll}">
                 <Button.Content>
                     <PathIcon Data="{StaticResource SemiIconClose}" />
@@ -52,7 +54,8 @@
             <ToggleSwitch
                 x:Name="togAutoRefresh"
                 HorizontalAlignment="Left"
-                Margin="{StaticResource MarginLr8}" />
+                Margin="{StaticResource MarginLr8}"
+                IsChecked="{Binding AutoRefresh}" />
         </WrapPanel>
 
         <DataGrid
@@ -63,11 +66,12 @@
             GridLinesVisibility="All"
             HeadersVisibility="Column"
             IsReadOnly="True"
-            ItemsSource="{Binding ConnectionItems}">
+            ItemsSource="{Binding ConnectionItems}"
+            SelectedItem="{Binding SelectedSource}">
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem x:Name="menuConnectionClose" Header="{x:Static resx:ResUI.menuConnectionClose}" />
-                    <MenuItem x:Name="menuConnectionCloseAll" Header="{x:Static resx:ResUI.menuConnectionCloseAll}" />
+                    <MenuItem x:Name="menuConnectionClose" Header="{x:Static resx:ResUI.menuConnectionClose}" Command="{Binding ConnectionCloseCmd}" />
+                    <MenuItem x:Name="menuConnectionCloseAll" Header="{x:Static resx:ResUI.menuConnectionCloseAll}" Command="{Binding ConnectionCloseAllCmd}" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.Columns>
