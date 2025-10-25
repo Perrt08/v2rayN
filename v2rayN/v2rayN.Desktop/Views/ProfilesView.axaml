@@ -22,6 +22,7 @@
                     Margin="{StaticResource MarginLr4}"
                     DisplayMemberBinding="{Binding Remarks}"
                     ItemsSource="{Binding SubItems}"
+                    SelectedItem="{Binding SelectedSub}"
                     Theme="{DynamicResource PureCardRadioGroupListBox}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -34,6 +35,7 @@
                     x:Name="btnEditSub"
                     Margin="{StaticResource MarginLr4}"
                     Classes="IconButton Success"
+                    Command="{Binding EditSubCmd}"
                     ToolTip.Tip="{x:Static resx:ResUI.menuSubEdit}">
                     <Button.Content>
                         <PathIcon Data="{StaticResource SemiIconEdit}" />
@@ -43,6 +45,7 @@
                     x:Name="btnAddSub"
                     Margin="{StaticResource MarginLr4}"
                     Classes="IconButton Success"
+                    Command="{Binding AddSubCmd}"
                     ToolTip.Tip="{x:Static resx:ResUI.menuSubAdd}">
                     <Button.Content>
                         <PathIcon Data="{StaticResource SemiIconPlus}" />
@@ -53,6 +56,7 @@
                     x:Name="txtServerFilter"
                     Width="200"
                     Margin="{StaticResource MarginLr4}"
+                    Text="{Binding ServerFilter}"
                     VerticalContentAlignment="Center"
                     Watermark="{x:Static resx:ResUI.MsgServerTitle}" />
 
@@ -70,6 +74,7 @@
                     x:Name="btnFastRealPing"
                     Margin="{StaticResource MarginLr4}"
                     Classes="IconButton Success"
+                    Command="{Binding FastRealPingCmd}"
                     ToolTip.Tip="{x:Static resx:ResUI.menuFastRealPing}">
                     <Button.Content>
                         <PathIcon Data="{StaticResource SemiIconBolt}" />
@@ -87,26 +92,27 @@
                 GridLinesVisibility="All"
                 HeadersVisibility="All"
                 IsReadOnly="True"
-                ItemsSource="{Binding ProfileItems}">
+                ItemsSource="{Binding ProfileItems}"
+                SelectedItem="{Binding SelectedProfile}">
                 <DataGrid.KeyBindings>
                     <KeyBinding Command="{Binding Export2ShareUrlCmd}" Gesture="Ctrl+C" />
                     <KeyBinding Command="{Binding SetDefaultServerCmd}" Gesture="Enter" />
                 </DataGrid.KeyBindings>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem x:Name="menuSetDefaultServer" Header="{x:Static resx:ResUI.menuSetDefaultServer}" />
-                        <MenuItem x:Name="menuEditServer" Header="{x:Static resx:ResUI.menuEditServer}" />
-                        <MenuItem x:Name="menuCopyServer" Header="{x:Static resx:ResUI.menuCopyServer}" />
-                        <MenuItem x:Name="menuRemoveServer" Header="{x:Static resx:ResUI.menuRemoveServer}" />
-                        <MenuItem x:Name="menuRemoveDuplicateServer" Header="{x:Static resx:ResUI.menuRemoveDuplicateServer}" />
+                        <MenuItem x:Name="menuSetDefaultServer" Command="{Binding SetDefaultServerCmd}" Header="{x:Static resx:ResUI.menuSetDefaultServer}" />
+                        <MenuItem x:Name="menuEditServer" Command="{Binding EditServerCmd}" Header="{x:Static resx:ResUI.menuEditServer}" />
+                        <MenuItem x:Name="menuCopyServer" Command="{Binding CopyServerCmd}" Header="{x:Static resx:ResUI.menuCopyServer}" />
+                        <MenuItem x:Name="menuRemoveServer" Command="{Binding RemoveServerCmd}" Header="{x:Static resx:ResUI.menuRemoveServer}" />
+                        <MenuItem x:Name="menuRemoveDuplicateServer" Command="{Binding RemoveDuplicateServerCmd}" Header="{x:Static resx:ResUI.menuRemoveDuplicateServer}" />
                         <Separator />
-                        <MenuItem x:Name="menuMixedTestServer" Header="{x:Static resx:ResUI.menuMixedTestServer}" />
-                        <MenuItem x:Name="menuTcpingServer" Header="{x:Static resx:ResUI.menuTcpingServer}" />
-                        <MenuItem x:Name="menuRealPingServer" Header="{x:Static resx:ResUI.menuRealPingServer}" />
-                        <MenuItem x:Name="menuSpeedServer" Header="{x:Static resx:ResUI.menuSpeedServer}" />
+                        <MenuItem x:Name="menuMixedTestServer" Command="{Binding MixedTestServerCmd}" Header="{x:Static resx:ResUI.menuMixedTestServer}" />
+                        <MenuItem x:Name="menuTcpingServer" Command="{Binding TcpingServerCmd}" Header="{x:Static resx:ResUI.menuTcpingServer}" />
+                        <MenuItem x:Name="menuRealPingServer" Command="{Binding RealPingServerCmd}" Header="{x:Static resx:ResUI.menuRealPingServer}" />
+                        <MenuItem x:Name="menuSpeedServer" Command="{Binding SpeedServerCmd}" Header="{x:Static resx:ResUI.menuSpeedServer}" />
                         <MenuItem Header="{x:Static resx:ResUI.menuTestServerResult}">
-                            <MenuItem x:Name="menuSortServerResult" Header="{x:Static resx:ResUI.menuSortServerResult}" />
-                            <MenuItem x:Name="menuRemoveInvalidServerResult" Header="{x:Static resx:ResUI.menuRemoveInvalidServerResult}" />
+                            <MenuItem x:Name="menuSortServerResult" Command="{Binding SortServerResultCmd}" Header="{x:Static resx:ResUI.menuSortServerResult}" />
+                            <MenuItem x:Name="menuRemoveInvalidServerResult" Command="{Binding RemoveInvalidServerResultCmd}" Header="{x:Static resx:ResUI.menuRemoveInvalidServerResult}" />
                         </MenuItem>
                         <Separator />
                         <MenuItem x:Name="menuMoveToGroup" Header="{x:Static resx:ResUI.menuMoveToGroup}">
@@ -118,36 +124,37 @@
                                             Width="200"
                                             DisplayMemberBinding="{Binding Remarks}"
                                             ItemsSource="{Binding SubItems}"
+                                            SelectedItem="{Binding SelectedMoveToGroup}"
                                             ToolTip.Tip="{x:Static resx:ResUI.menuSubscription}" />
                                     </DockPanel>
                                 </MenuItem.Header>
                             </MenuItem>
                         </MenuItem>
                         <MenuItem Header="{x:Static resx:ResUI.menuMoveTo}">
-                            <MenuItem x:Name="menuMoveTop" Header="{x:Static resx:ResUI.menuMoveTop}" />
-                            <MenuItem x:Name="menuMoveUp" Header="{x:Static resx:ResUI.menuMoveUp}" />
-                            <MenuItem x:Name="menuMoveDown" Header="{x:Static resx:ResUI.menuMoveDown}" />
-                            <MenuItem x:Name="menuMoveBottom" Header="{x:Static resx:ResUI.menuMoveBottom}" />
+                            <MenuItem x:Name="menuMoveTop" Command="{Binding MoveTopCmd}" Header="{x:Static resx:ResUI.menuMoveTop}" />
+                            <MenuItem x:Name="menuMoveUp" Command="{Binding MoveUpCmd}" Header="{x:Static resx:ResUI.menuMoveUp}" />
+                            <MenuItem x:Name="menuMoveDown" Command="{Binding MoveDownCmd}" Header="{x:Static resx:ResUI.menuMoveDown}" />
+                            <MenuItem x:Name="menuMoveBottom" Command="{Binding MoveBottomCmd}" Header="{x:Static resx:ResUI.menuMoveBottom}" />
                         </MenuItem>
                         <MenuItem x:Name="menuSelectAll" Header="{x:Static resx:ResUI.menuSelectAll}" />
                         <Separator />
-                        <MenuItem x:Name="menuShareServer" Header="{x:Static resx:ResUI.menuShareServer}" />
+                        <MenuItem x:Name="menuShareServer" Command="{Binding ShareServerCmd}" Header="{x:Static resx:ResUI.menuShareServer}" />
                         <MenuItem Header="{x:Static resx:ResUI.menuExportConfig}">
-                            <MenuItem x:Name="menuExport2ClientConfig" Header="{x:Static resx:ResUI.menuExport2ClientConfig}" />
-                            <MenuItem x:Name="menuExport2ClientConfigClipboard" Header="{x:Static resx:ResUI.menuExport2ClientConfigClipboard}" />
+                            <MenuItem x:Name="menuExport2ClientConfig" Command="{Binding Export2ClientConfigCmd}" Header="{x:Static resx:ResUI.menuExport2ClientConfig}" />
+                            <MenuItem x:Name="menuExport2ClientConfigClipboard" Command="{Binding Export2ClientConfigClipboardCmd}" Header="{x:Static resx:ResUI.menuExport2ClientConfigClipboard}" />
                             <Separator />
-                            <MenuItem x:Name="menuExport2ShareUrl" Header="{x:Static resx:ResUI.menuExport2ShareUrl}" />
-                            <MenuItem x:Name="menuExport2ShareUrlBase64" Header="{x:Static resx:ResUI.menuExport2ShareUrlBase64}" />
+                            <MenuItem x:Name="menuExport2ShareUrl" Command="{Binding Export2ShareUrlCmd}" Header="{x:Static resx:ResUI.menuExport2ShareUrl}" />
+                            <MenuItem x:Name="menuExport2ShareUrlBase64" Command="{Binding Export2ShareUrlBase64Cmd}" Header="{x:Static resx:ResUI.menuExport2ShareUrlBase64}" />
                         </MenuItem>
                         <Separator />
                         <MenuItem Header="{x:Static resx:ResUI.menuGenGroupMultipleServer}">
-                            <MenuItem x:Name="menuGenGroupMultipleServerXrayRandom" Header="{x:Static resx:ResUI.menuGenGroupMultipleServerXrayRandom}" />
-                            <MenuItem x:Name="menuGenGroupMultipleServerXrayRoundRobin" Header="{x:Static resx:ResUI.menuGenGroupMultipleServerXrayRoundRobin}" />
-                            <MenuItem x:Name="menuGenGroupMultipleServerXrayLeastPing" Header="{x:Static resx:ResUI.menuGenGroupMultipleServerXrayLeastPing}" />
-                            <MenuItem x:Name="menuGenGroupMultipleServerXrayLeastLoad" Header="{x:Static resx:ResUI.menuGenGroupMultipleServerXrayLeastLoad}" />
+                            <MenuItem x:Name="menuGenGroupMultipleServerXrayRandom" Command="{Binding GenGroupMultipleServerXrayRandomCmd}" Header="{x:Static resx:ResUI.menuGenGroupMultipleServerXrayRandom}" />
+                            <MenuItem x:Name="menuGenGroupMultipleServerXrayRoundRobin" Command="{Binding GenGroupMultipleServerXrayRoundRobinCmd}" Header="{x:Static resx:ResUI.menuGenGroupMultipleServerXrayRoundRobin}" />
+                            <MenuItem x:Name="menuGenGroupMultipleServerXrayLeastPing" Command="{Binding GenGroupMultipleServerXrayLeastPingCmd}" Header="{x:Static resx:ResUI.menuGenGroupMultipleServerXrayLeastPing}" />
+                            <MenuItem x:Name="menuGenGroupMultipleServerXrayLeastLoad" Command="{Binding GenGroupMultipleServerXrayLeastLoadCmd}" Header="{x:Static resx:ResUI.menuGenGroupMultipleServerXrayLeastLoad}" />
                             <Separator />
-                            <MenuItem x:Name="menuGenGroupMultipleServerSingBoxLeastPing" Header="{x:Static resx:ResUI.menuGenGroupMultipleServerSingBoxLeastPing}" />
-                            <MenuItem x:Name="menuGenGroupMultipleServerSingBoxFallback" Header="{x:Static resx:ResUI.menuGenGroupMultipleServerSingBoxFallback}" />
+                            <MenuItem x:Name="menuGenGroupMultipleServerSingBoxLeastPing" Command="{Binding GenGroupMultipleServerSingBoxLeastPingCmd}" Header="{x:Static resx:ResUI.menuGenGroupMultipleServerSingBoxLeastPing}" />
+                            <MenuItem x:Name="menuGenGroupMultipleServerSingBoxFallback" Command="{Binding GenGroupMultipleServerSingBoxFallbackCmd}" Header="{x:Static resx:ResUI.menuGenGroupMultipleServerSingBoxFallback}" />
                         </MenuItem>
                     </ContextMenu>
                 </DataGrid.ContextMenu>

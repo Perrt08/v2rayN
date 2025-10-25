@@ -34,8 +34,9 @@ public partial class ThemeSettingViewModel : MyReactiveObject
         CurrentFontSize = _config.UiItem.CurrentFontSize;
         CurrentLanguage = _config.UiItem.CurrentLanguage;
 
-        this.WhenAnyValue(x => x.CurrentTheme)
-            .Subscribe(c =>
+        PropertyChanged += (sender, args) =>
+        {
+            if (args.PropertyName == nameof(CurrentTheme))
             {
                 if (_config.UiItem.CurrentTheme != CurrentTheme)
                 {
@@ -43,34 +44,27 @@ public partial class ThemeSettingViewModel : MyReactiveObject
                     ModifyTheme();
                     ConfigHandler.SaveConfig(_config);
                 }
-            });
-
-        this.WhenAnyValue(
-                x => x.CurrentFontSize,
-                y => y > 0)
-            .Subscribe(c =>
+            }
+            else if (args.PropertyName == nameof(CurrentFontSize))
             {
-                if (_config.UiItem.CurrentFontSize != CurrentFontSize && CurrentFontSize >= Global.MinFontSize)
+                if (CurrentFontSize > 0 && _config.UiItem.CurrentFontSize != CurrentFontSize && CurrentFontSize >= Global.MinFontSize)
                 {
                     _config.UiItem.CurrentFontSize = CurrentFontSize;
                     ModifyFontSize();
                     ConfigHandler.SaveConfig(_config);
                 }
-            });
-
-        this.WhenAnyValue(
-                x => x.CurrentLanguage,
-                y => y != null && !y.IsNullOrEmpty())
-            .Subscribe(c =>
+            }
+            else if (args.PropertyName == nameof(CurrentLanguage))
             {
-                if (CurrentLanguage.IsNotEmpty() && _config.UiItem.CurrentLanguage != CurrentLanguage)
+                if (CurrentLanguage != null && !CurrentLanguage.IsNullOrEmpty() && CurrentLanguage.IsNotEmpty() && _config.UiItem.CurrentLanguage != CurrentLanguage)
                 {
                     _config.UiItem.CurrentLanguage = CurrentLanguage;
                     Thread.CurrentThread.CurrentUICulture = new(CurrentLanguage);
                     ConfigHandler.SaveConfig(_config);
                     NoticeManager.Instance.Enqueue(ResUI.NeedRebootTips);
                 }
-            });
+            }
+        };
     }
 
     private void ModifyTheme()

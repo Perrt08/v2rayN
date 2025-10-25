@@ -24,6 +24,9 @@ internal class Program
 
     private static bool OnStartup(string[]? Args)
     {
+        // Initialize AOT JsonSerializerContext for Native AOT support
+        JsonUtils.SetDefaultAotContext(AotJsonContext.Default);
+
         if (Utils.IsWindows())
         {
             var exePathKey = Utils.GetMd5(Utils.GetExePath());

@@ -20,6 +20,9 @@ public partial class App : Application
     /// <param name="e"></param>
     protected override void OnStartup(StartupEventArgs e)
     {
+        // Initialize AOT JsonSerializerContext for Native AOT support
+        JsonUtils.SetDefaultAotContext(AotJsonContext.Default);
+
         var exePathKey = Utils.GetMd5(Utils.GetExePath());
 
         var rebootas = (e.Args ?? Array.Empty<string>()).Any(t => t == Global.RebootAs);

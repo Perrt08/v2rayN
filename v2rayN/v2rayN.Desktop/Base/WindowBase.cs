@@ -2,6 +2,8 @@ namespace v2rayN.Desktop.Base;
 
 public class WindowBase<TViewModel> : ReactiveWindow<TViewModel> where TViewModel : class
 {
+    protected readonly CompositeDisposable _disposables = new();
+
     public WindowBase()
     {
         Loaded += OnLoaded;
@@ -39,6 +41,7 @@ public class WindowBase<TViewModel> : ReactiveWindow<TViewModel> where TViewMode
     protected override void OnClosed(EventArgs e)
     {
         base.OnClosed(e);
+        _disposables.Dispose();
         try
         {
             ConfigHandler.SaveWindowSizeItem(AppManager.Instance.Config, GetType().Name, Width, Height);

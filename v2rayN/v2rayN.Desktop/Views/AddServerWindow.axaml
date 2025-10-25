@@ -22,6 +22,7 @@
             <Button
                 x:Name="btnSave"
                 Width="100"
+                Command="{Binding SaveCmd}"
                 Content="{x:Static resx:ResUI.TbConfirm}"
                 IsDefault="True" />
             <Button
@@ -52,6 +53,7 @@
                             x:Name="cmbCoreType"
                             Width="100"
                             Margin="{StaticResource Margin4}"
+                            SelectedValue="{Binding CoreType}"
                             ToolTip.Tip="{x:Static resx:ResUI.TbCoreType}" />
                     </StackPanel>
 
@@ -66,7 +68,8 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         Width="400"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Remarks}" />
 
                     <TextBlock
                         Grid.Row="2"
@@ -79,7 +82,8 @@
                         Grid.Row="2"
                         Grid.Column="1"
                         Width="400"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Address}" />
 
                     <TextBlock
                         Grid.Row="3"
@@ -93,7 +97,8 @@
                         Grid.Column="1"
                         Width="200"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        Text="{Binding SelectedSource.Port}" />
                 </Grid>
 
                 <Separator Grid.Row="1" Margin="{StaticResource MarginTb8}" />
@@ -116,7 +121,8 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         Width="400"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Id}" />
                     <Button
                         x:Name="btnGUID"
                         Grid.Row="1"
@@ -136,7 +142,8 @@
                         Grid.Column="1"
                         Width="200"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        Text="{Binding SelectedSource.AlterId}" />
 
                     <TextBlock
                         Grid.Row="3"
@@ -149,7 +156,8 @@
                         Grid.Row="3"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding SelectedSource.Security}" />
 
                     <TextBlock
                         Grid.Row="4"
@@ -162,7 +170,8 @@
                         Grid.Row="4"
                         Grid.Column="1"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        IsChecked="{Binding SelectedSource.MuxEnabled}" />
                 </Grid>
                 <Grid
                     x:Name="gridSs"
@@ -182,7 +191,8 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         Width="400"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Id}" />
 
                     <TextBlock
                         Grid.Row="2"
@@ -195,7 +205,8 @@
                         Grid.Row="2"
                         Grid.Column="1"
                         Width="300"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding SelectedSource.Security}" />
 
                     <TextBlock
                         Grid.Row="4"
@@ -208,7 +219,8 @@
                         Grid.Row="4"
                         Grid.Column="1"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        IsChecked="{Binding SelectedSource.MuxEnabled}" />
                 </Grid>
                 <Grid
                     x:Name="gridSocks"
@@ -228,7 +240,8 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         Width="400"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Security}" />
 
                     <TextBlock
                         Grid.Row="2"
@@ -241,7 +254,8 @@
                         Grid.Row="2"
                         Grid.Column="1"
                         Width="400"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Id}" />
                 </Grid>
                 <Grid
                     x:Name="gridVLESS"
@@ -261,7 +275,8 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         Width="400"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Id}" />
                     <Button
                         x:Name="btnGUID5"
                         Grid.Row="1"
@@ -280,7 +295,8 @@
                         Grid.Row="2"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding SelectedSource.Flow}" />
 
                     <TextBlock
                         Grid.Row="3"
@@ -294,7 +310,8 @@
                         Grid.Column="1"
                         Width="200"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        Text="{Binding SelectedSource.Security}" />
 
                     <TextBlock
                         Grid.Row="4"
@@ -307,7 +324,8 @@
                         Grid.Row="4"
                         Grid.Column="1"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        IsChecked="{Binding SelectedSource.MuxEnabled}" />
                 </Grid>
                 <Grid
                     x:Name="gridTrojan"
@@ -327,7 +345,8 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         Width="400"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Id}" />
 
                     <TextBlock
                         Grid.Row="2"
@@ -340,7 +359,8 @@
                         Grid.Row="2"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding SelectedSource.Flow}" />
 
                     <TextBlock
                         Grid.Row="4"
@@ -353,7 +373,8 @@
                         Grid.Row="4"
                         Grid.Column="1"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        IsChecked="{Binding SelectedSource.MuxEnabled}" />
                 </Grid>
                 <Grid
                     x:Name="gridHysteria2"
@@ -373,7 +394,8 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         Width="400"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Id}" />
 
                     <TextBlock
                         Grid.Row="2"
@@ -386,7 +408,8 @@
                         Grid.Row="2"
                         Grid.Column="1"
                         Width="400"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Path}" />
 
                     <TextBlock
                         Grid.Row="3"
@@ -400,6 +423,7 @@
                         Grid.Column="1"
                         Width="400"
                         Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Ports}"
                         Watermark="1000-2000,3000,4000" />
                     <TextBlock
                         Grid.Row="3"
@@ -426,7 +450,8 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         Width="400"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Id}" />
 
                     <TextBlock
                         Grid.Row="2"
@@ -439,7 +464,8 @@
                         Grid.Row="2"
                         Grid.Column="1"
                         Width="400"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Security}" />
 
                     <TextBlock
                         Grid.Row="3"
@@ -452,7 +478,8 @@
                         Grid.Row="3"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding SelectedSource.HeaderType}" />
                 </Grid>
                 <Grid
                     x:Name="gridWireguard"
@@ -472,7 +499,8 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         Width="400"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Id}" />
 
                     <TextBlock
                         Grid.Row="2"
@@ -486,7 +514,8 @@
                         Grid.Column="1"
                         Width="400"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        Text="{Binding SelectedSource.PublicKey}" />
 
                     <TextBlock
                         Grid.Row="3"
@@ -500,6 +529,7 @@
                         Grid.Column="1"
                         Width="400"
                         Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Path}"
                         Watermark="2,3,4" />
 
                     <TextBlock
@@ -514,6 +544,7 @@
                         Grid.Column="1"
                         Width="400"
                         Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.RequestHost}"
                         Watermark="Ipv4,Ipv6" />
 
                     <TextBlock
@@ -529,6 +560,7 @@
                         Width="200"
                         Margin="{StaticResource Margin4}"
                         HorizontalAlignment="Left"
+                        Text="{Binding SelectedSource.ShortId}"
                         Watermark="1500" />
                 </Grid>
                 <Grid
@@ -549,7 +581,8 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         Width="400"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Id}" />
                 </Grid>
 
                 <Separator
@@ -580,7 +613,8 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding SelectedSource.Network}" />
                     <TextBlock
                         Grid.Row="1"
                         Grid.Column="2"
@@ -603,7 +637,8 @@
                         <ComboBox
                             x:Name="cmbHeaderType"
                             Width="200"
-                            Margin="{StaticResource Margin4}" />
+                            Margin="{StaticResource Margin4}"
+                            SelectedValue="{Binding SelectedSource.HeaderType}" />
 
                         <Button
                             x:Name="btnExtra"
@@ -632,6 +667,7 @@
                                             VerticalAlignment="Center"
                                             Classes="TextArea"
                                             MinLines="6"
+                                            Text="{Binding SelectedSource.Extra}"
                                             TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Flyout>
@@ -657,7 +693,8 @@
                         Grid.Row="3"
                         Grid.Column="1"
                         Width="400"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.RequestHost}" />
                     <TextBlock
                         x:Name="tipRequestHost"
                         Grid.Row="3"
@@ -677,7 +714,8 @@
                         Grid.Row="4"
                         Grid.Column="1"
                         Width="400"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        Text="{Binding SelectedSource.Path}" />
                     <TextBlock
                         x:Name="tipPath"
                         Grid.Row="4"
@@ -706,7 +744,8 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding SelectedSource.StreamSecurity}" />
                 </Grid>
                 <Grid
                     x:Name="gridTlsMore"
@@ -727,7 +766,8 @@
                         Grid.Column="1"
                         Width="400"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        Text="{Binding SelectedSource.Sni}" />
 
                     <TextBlock
                         Grid.Row="2"
@@ -740,7 +780,8 @@
                         Grid.Row="2"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding SelectedSource.Fingerprint}" />
 
                     <TextBlock
                         Grid.Row="3"
@@ -753,7 +794,8 @@
                         Grid.Row="3"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding SelectedSource.Alpn}" />
 
                     <TextBlock
                         Grid.Row="4"
@@ -766,7 +808,8 @@
                         Grid.Row="4"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding SelectedSource.AllowInsecure}" />
                 </Grid>
                 <Grid
                     x:Name="gridRealityMore"
@@ -787,7 +830,8 @@
                         Grid.Column="1"
                         Width="400"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        Text="{Binding SelectedSource.Sni}" />
 
                     <TextBlock
                         Grid.Row="1"
@@ -800,7 +844,8 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding SelectedSource.Fingerprint}" />
 
                     <TextBlock
                         Grid.Row="2"
@@ -814,7 +859,8 @@
                         Grid.Column="1"
                         Width="400"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        Text="{Binding SelectedSource.PublicKey}" />
 
                     <TextBlock
                         Grid.Row="3"
@@ -828,7 +874,8 @@
                         Grid.Column="1"
                         Width="200"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        Text="{Binding SelectedSource.ShortId}" />
 
                     <TextBlock
                         Grid.Row="4"
@@ -842,7 +889,8 @@
                         Grid.Column="1"
                         Width="400"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        Text="{Binding SelectedSource.SpiderX}" />
 
                     <TextBlock
                         Grid.Row="5"
@@ -856,7 +904,8 @@
                         Grid.Column="1"
                         Width="400"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        Text="{Binding SelectedSource.Mldsa65Verify}" />
                 </Grid>
                 <Separator Grid.Row="8" Margin="{StaticResource MarginTb8}" />
             </Grid>

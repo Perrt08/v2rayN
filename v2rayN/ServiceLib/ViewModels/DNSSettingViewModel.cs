@@ -29,6 +29,8 @@ public partial class DNSSettingViewModel : MyReactiveObject
 
     [ObservableAsProperty] public bool IsSimpleDNSEnabled { get; }
 
+    [ObservableAsProperty] public bool IsCustomDNSEnabled { get; }
+
     public ReactiveCommand<Unit, Unit> SaveCmd { get; }
     public ReactiveCommand<Unit, Unit> ImportDefConfig4V2rayCompatibleCmd { get; }
     public ReactiveCommand<Unit, Unit> ImportDefConfig4SingboxCompatibleCmd { get; }
@@ -55,6 +57,10 @@ public partial class DNSSettingViewModel : MyReactiveObject
         this.WhenAnyValue(x => x.RayCustomDNSEnableCompatible, x => x.SBCustomDNSEnableCompatible)
             .Select(x => !(x.Item1 && x.Item2))
             .ToProperty(this, x => x.IsSimpleDNSEnabled);
+
+        this.WhenAnyValue(x => x.RayCustomDNSEnableCompatible, x => x.SBCustomDNSEnableCompatible)
+            .Select(x => x.Item1 || x.Item2)
+            .ToProperty(this, x => x.IsCustomDNSEnabled);
 
         _ = Init();
     }

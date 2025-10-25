@@ -23,7 +23,8 @@
                 x:Name="btnSave"
                 Width="100"
                 Content="{x:Static resx:ResUI.TbConfirm}"
-                IsDefault="True" />
+                IsDefault="True"
+                Command="{Binding SaveCmd}" />
             <Button
                 x:Name="btnCancel"
                 Width="100"
@@ -51,7 +52,8 @@
                             Grid.Row="0"
                             Grid.Column="1"
                             Width="200"
-                            Margin="{StaticResource Margin4}" />
+                            Margin="{StaticResource Margin4}"
+                            Text="{Binding LocalPort}" />
                         <TextBlock
                             Grid.Row="0"
                             Grid.Column="2"
@@ -71,7 +73,8 @@
                             Grid.Row="2"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding SecondLocalPortEnabled}" />
 
                         <TextBlock
                             Grid.Row="3"
@@ -84,7 +87,8 @@
                             Grid.Row="3"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding UdpEnabled}" />
 
                         <TextBlock
                             Grid.Row="4"
@@ -97,7 +101,8 @@
                             Grid.Row="4"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding SniffingEnabled}" />
 
                         <TextBlock
                             Grid.Row="5"
@@ -126,7 +131,8 @@
                             Grid.Row="6"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding RouteOnly}" />
 
                         <TextBlock
                             Grid.Row="7"
@@ -139,7 +145,8 @@
                             Grid.Row="7"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding AllowLANConn}" />
 
                         <TextBlock
                             Grid.Row="8"
@@ -152,7 +159,8 @@
                             Grid.Row="8"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding NewPort4LAN}" />
 
                         <TextBlock
                             Grid.Row="9"
@@ -165,7 +173,9 @@
                             Grid.Row="9"
                             Grid.Column="1"
                             Width="200"
-                            Margin="{StaticResource Margin4}" />
+                            Margin="{StaticResource Margin4}"
+                            IsEnabled="{Binding NewPort4LAN}"
+                            Text="{Binding User}" />
 
                         <TextBlock
                             Grid.Row="10"
@@ -178,7 +188,9 @@
                             Grid.Row="10"
                             Grid.Column="1"
                             Width="200"
-                            Margin="{StaticResource Margin4}" />
+                            Margin="{StaticResource Margin4}"
+                            IsEnabled="{Binding NewPort4LAN}"
+                            Text="{Binding Pass}" />
 
                         <TextBlock
                             Grid.Row="11"
@@ -191,7 +203,8 @@
                             Grid.Row="11"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding MuxEnabled}" />
 
                         <TextBlock
                             Grid.Row="12"
@@ -204,7 +217,8 @@
                             Grid.Row="12"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding LogEnabled}" />
 
                         <TextBlock
                             Grid.Row="13"
@@ -217,7 +231,8 @@
                             Grid.Row="13"
                             Grid.Column="1"
                             Width="200"
-                            Margin="{StaticResource Margin4}" />
+                            Margin="{StaticResource Margin4}"
+                            SelectedValue="{Binding LogLevel}" />
 
                         <TextBlock
                             Grid.Row="14"
@@ -230,7 +245,8 @@
                             Grid.Row="14"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding DefAllowInsecure}" />
 
                         <TextBlock
                             Grid.Row="15"
@@ -243,7 +259,8 @@
                             Grid.Row="15"
                             Grid.Column="1"
                             Width="200"
-                            Margin="{StaticResource Margin4}" />
+                            Margin="{StaticResource Margin4}"
+                            SelectedValue="{Binding DefFingerprint}" />
 
                         <TextBlock
                             Grid.Row="16"
@@ -256,7 +273,8 @@
                             Grid.Row="16"
                             Grid.Column="1"
                             Width="200"
-                            Margin="{StaticResource Margin4}" />
+                            Margin="{StaticResource Margin4}"
+                            SelectedValue="{Binding DefUserAgent}" />
                         <TextBlock
                             Grid.Row="16"
                             Grid.Column="3"
@@ -274,7 +292,8 @@
                             Grid.Row="17"
                             Grid.Column="1"
                             Width="200"
-                            Margin="{StaticResource Margin4}" />
+                            Margin="{StaticResource Margin4}"
+                            SelectedValue="{Binding Mux4SboxProtocol}" />
 
                         <TextBlock
                             Grid.Row="18"
@@ -287,7 +306,8 @@
                             Grid.Row="18"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding EnableCacheFile4Sbox}" />
 
                         <TextBlock
                             Grid.Row="19"
@@ -305,12 +325,14 @@
                                 x:Name="txtUpMbps"
                                 Width="90"
                                 Margin="{StaticResource Margin4}"
-                                Watermark="Up" />
+                                Watermark="Up"
+                                Text="{Binding HyUpMbps}" />
                             <TextBox
                                 x:Name="txtDownMbps"
                                 Width="90"
                                 Margin="{StaticResource Margin4}"
-                                Watermark="Down" />
+                                Watermark="Down"
+                                Text="{Binding HyDownMbps}" />
                         </StackPanel>
 
                         <TextBlock
@@ -324,7 +346,8 @@
                             Grid.Row="20"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding EnableFragment}" />
                         <TextBlock
                             Grid.Row="20"
                             Grid.Column="2"
@@ -354,7 +377,8 @@
                             Grid.Row="1"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding AutoRun}" />
                         <TextBlock
                             x:Name="tbAutoRunTip"
                             Grid.Row="1"
@@ -375,7 +399,8 @@
                             Grid.Row="2"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding EnableStatistics}" />
 
                         <TextBlock
                             Grid.Row="3"
@@ -388,7 +413,8 @@
                             Grid.Row="3"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding DisplayRealTimeSpeed}" />
 
                         <TextBlock
                             Grid.Row="4"
@@ -401,7 +427,8 @@
                             Grid.Row="4"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding KeepOlderDedupl}" />
 
                         <TextBlock
                             Grid.Row="5"
@@ -414,7 +441,8 @@
                             Grid.Row="5"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding EnableAutoAdjustMainLvColWidth}" />
 
                         <TextBlock
                             Grid.Row="6"
@@ -427,7 +455,8 @@
                             Grid.Row="6"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding EnableUpdateSubOnlyRemarksExist}" />
 
                         <TextBlock
                             Grid.Row="8"
@@ -440,7 +469,8 @@
                             Grid.Row="8"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding AutoHideStartup}" />
 
                         <TextBlock
                             x:Name="labHide2TrayWhenClose"
@@ -454,7 +484,8 @@
                             Grid.Row="9"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding Hide2TrayWhenClose}" />
                         <TextBlock
                             x:Name="labHide2TrayWhenCloseTip"
                             Grid.Row="9"
@@ -474,7 +505,8 @@
                             Grid.Row="11"
                             Grid.Column="1"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            IsChecked="{Binding DoubleClick2Activate}" />
 
                         <TextBlock
                             Grid.Row="14"
@@ -488,7 +520,8 @@
                             Grid.Column="1"
                             Width="200"
                             Margin="{StaticResource Margin4}"
-                            HorizontalAlignment="Left" />
+                            HorizontalAlignment="Left"
+                            Text="{Binding AutoUpdateInterval}" />
 
                         <TextBlock
                             Grid.Row="15"
@@ -502,7 +535,8 @@
                             Grid.Column="1"
                             Width="300"
                             Margin="{StaticResource Margin4}"
-                            IsEditable="True" />
+                            IsEditable="True"
+                            Text="{Binding CurrentFontFamily}" />
                         <TextBlock
                             Grid.Row="15"
                             Grid.Column="2"
@@ -522,7 +556,8 @@
                             Grid.Row="16"
                             Grid.Column="1"
                             Width="200"
-                            Margin="{StaticResource Margin4}" />
+                            Margin="{StaticResource Margin4}"
+                            SelectedValue="{Binding MixedConcurrencyCount}" />
 
                         <TextBlock
                             Grid.Row="17"
@@ -535,7 +570,8 @@
                             Grid.Row="17"
                             Grid.Column="1"
                             Width="200"
-                            Margin="{StaticResource Margin4}" />
+                            Margin="{StaticResource Margin4}"
+                            SelectedValue="{Binding SpeedTestTimeout}" />
 
                         <TextBlock
                             Grid.Row="18"
@@ -549,7 +585,8 @@
                             Grid.Column="1"
                             Width="300"
                             Margin="{StaticResource Margin4}"
-                            IsEditable="True" />
+                            IsEditable="True"
+                            Text="{Binding SpeedTestUrl}" />
 
                         <TextBlock
                             Grid.Row="19"
@@ -563,7 +600,8 @@
                             Grid.Column="1"
                             Width="300"
                             Margin="{StaticResource Margin4}"
-                            IsEditable="True" />
+                            IsEditable="True"
+                            Text="{Binding SpeedPingTestUrl}" />
 
                         <TextBlock
                             Grid.Row="20"
@@ -576,7 +614,8 @@
                             Grid.Row="20"
                             Grid.Column="1"
                             Width="300"
-                            Margin="{StaticResource Margin4}" />
+                            Margin="{StaticResource Margin4}"
+                            SelectedValue="{Binding IPAPIUrl}" />
 
                         <TextBlock
                             Grid.Row="21"
@@ -590,7 +629,8 @@
                             Grid.Column="1"
                             Width="300"
                             Margin="{StaticResource Margin4}"
-                            IsEditable="True" />
+                            IsEditable="True"
+                            Text="{Binding SubConvertUrl}" />
 
                         <TextBlock
                             Grid.Row="22"
@@ -603,7 +643,8 @@
                             Grid.Row="22"
                             Grid.Column="1"
                             Width="200"
-                            Margin="{StaticResource Margin4}" />
+                            Margin="{StaticResource Margin4}"
+                            SelectedIndex="{Binding MainGirdOrientation}" />
 
                         <TextBlock
                             Grid.Row="23"
@@ -617,7 +658,8 @@
                             Grid.Column="1"
                             Width="300"
                             Margin="{StaticResource Margin4}"
-                            IsEditable="True" />
+                            IsEditable="True"
+                            SelectedValue="{Binding GeoFileSourceUrl}" />
                         <TextBlock
                             Grid.Row="23"
                             Grid.Column="2"
@@ -638,7 +680,8 @@
                             Grid.Column="1"
                             Width="300"
                             Margin="{StaticResource Margin4}"
-                            IsEditable="True" />
+                            IsEditable="True"
+                            SelectedValue="{Binding SrsFileSourceUrl}" />
                         <TextBlock
                             Grid.Row="24"
                             Grid.Column="2"
@@ -659,7 +702,8 @@
                             Grid.Column="1"
                             Width="300"
                             Margin="{StaticResource Margin4}"
-                            IsEditable="True" />
+                            IsEditable="True"
+                            SelectedValue="{Binding RoutingRulesSourceUrl}" />
                         <TextBlock
                             Grid.Row="25"
                             Grid.Column="2"
@@ -686,7 +730,8 @@
                             <ToggleSwitch
                                 x:Name="tognotProxyLocalAddress"
                                 Margin="{StaticResource Margin4}"
-                                HorizontalAlignment="Left" />
+                                HorizontalAlignment="Left"
+                                IsChecked="{Binding NotProxyLocalAddress}" />
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -697,7 +742,8 @@
                             <ComboBox
                                 x:Name="cmbsystemProxyAdvancedProtocol"
                                 MinWidth="400"
-                                Margin="{StaticResource Margin4}" />
+                                Margin="{StaticResource Margin4}"
+                                SelectedValue="{Binding SystemProxyAdvancedProtocol}" />
                         </StackPanel>
                     </StackPanel>
 
@@ -719,7 +765,8 @@
                         VerticalAlignment="Stretch"
                         BorderThickness="1"
                         Classes="TextArea"
-                        TextWrapping="Wrap" />
+                        TextWrapping="Wrap"
+                        Text="{Binding SystemProxyExceptions}" />
                 </DockPanel>
             </TabItem>
 
@@ -741,7 +788,8 @@
                         Grid.Row="2"
                         Grid.Column="1"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        IsChecked="{Binding TunAutoRoute}" />
 
                     <TextBlock
                         Grid.Row="3"
@@ -754,7 +802,8 @@
                         Grid.Row="3"
                         Grid.Column="1"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        IsChecked="{Binding TunStrictRoute}" />
 
                     <TextBlock
                         Grid.Row="4"
@@ -768,7 +817,8 @@
                         Grid.Column="1"
                         Width="200"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        SelectedValue="{Binding TunStack}" />
 
                     <TextBlock
                         Grid.Row="5"
@@ -782,7 +832,8 @@
                         Grid.Column="1"
                         Width="200"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        SelectedValue="{Binding TunMtu}" />
 
                     <TextBlock
                         Grid.Row="6"
@@ -795,7 +846,8 @@
                         Grid.Row="6"
                         Grid.Column="1"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        IsChecked="{Binding TunEnableExInbound}" />
 
                     <TextBlock
                         Grid.Row="7"
@@ -808,7 +860,8 @@
                         Grid.Row="7"
                         Grid.Column="1"
                         Margin="{StaticResource Margin4}"
-                        HorizontalAlignment="Left" />
+                        HorizontalAlignment="Left"
+                        IsChecked="{Binding TunEnableIPv6Address}" />
 
                 </Grid>
             </TabItem>
@@ -829,7 +882,8 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding CoreType1}" />
 
                     <TextBlock
                         Grid.Row="2"
@@ -842,7 +896,8 @@
                         Grid.Row="2"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding CoreType2}" />
 
                     <TextBlock
                         Grid.Row="3"
@@ -855,7 +910,8 @@
                         Grid.Row="3"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding CoreType3}" />
 
                     <TextBlock
                         Grid.Row="4"
@@ -868,7 +924,8 @@
                         Grid.Row="4"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding CoreType4}" />
 
                     <TextBlock
                         Grid.Row="5"
@@ -881,7 +938,8 @@
                         Grid.Row="5"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding CoreType5}" />
 
                     <TextBlock
                         Grid.Row="6"
@@ -894,7 +952,8 @@
                         Grid.Row="6"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding CoreType6}" />
 
                     <TextBlock
                         Grid.Row="7"
@@ -907,7 +966,8 @@
                         Grid.Row="7"
                         Grid.Column="1"
                         Width="200"
-                        Margin="{StaticResource Margin4}" />
+                        Margin="{StaticResource Margin4}"
+                        SelectedValue="{Binding CoreType9}" />
                 </Grid>
             </TabItem>
         </TabControl>

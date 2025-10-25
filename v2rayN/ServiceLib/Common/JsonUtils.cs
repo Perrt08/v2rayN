@@ -29,6 +29,25 @@ public class JsonUtils
         CommentHandling = JsonCommentHandling.Skip
     };
 
+    // Default AOT JsonSerializerContext for Native AOT support
+    private static JsonSerializerContext? _defaultAotContext;
+
+    /// <summary>
+    /// Set the default JsonSerializerContext for AOT scenarios
+    /// </summary>
+    public static void SetDefaultAotContext(JsonSerializerContext context)
+    {
+        _defaultAotContext = context;
+    }
+
+    /// <summary>
+    /// Get the default AOT context (for Native AOT scenarios)
+    /// </summary>
+    public static JsonSerializerContext? GetDefaultAotContext()
+    {
+        return _defaultAotContext;
+    }
+
     /// <summary>
     /// DeepCopy
     /// </summary>
@@ -42,6 +61,7 @@ public class JsonUtils
 
     /// <summary>
     /// Deserialize to object
+    /// Automatically uses AOT-friendly context if available
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="strJson"></param>
@@ -54,10 +74,47 @@ public class JsonUtils
             {
                 return default;
             }
+
+            // Try to use AOT context if available
+            if (_defaultAotContext != null)
+            {
+                var typeInfo = (JsonTypeInfo<T>?)_defaultAotContext.GetTypeInfo(typeof(T));
+                if (typeInfo != null)
+                {
+                    return JsonSerializer.Deserialize(strJson, typeInfo);
+                }
+            }
+
+            // Fallback to reflection-based deserialization
             return JsonSerializer.Deserialize<T>(strJson, _defaultDeserializeOptions);
         }
-        catch
+        catch (Exception ex)
         {
+            Logging.SaveLog(_tag, ex);
+            return default;
+        }
+    }
+
+    /// <summary>
+    /// Deserialize to object with JsonTypeInfo (AOT-friendly)
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="strJson"></param>
+    /// <param name="jsonTypeInfo"></param>
+    /// <returns></returns>
+    public static T? Deserialize<T>(string? strJson, JsonTypeInfo<T> jsonTypeInfo)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(strJson))
+            {
+                return default;
+            }
+            return JsonSerializer.Deserialize(strJson, jsonTypeInfo);
+        }
+        catch (Exception ex)
+        {
+            Logging.SaveLog(_tag, ex);
             return default;
         }
     }
@@ -86,6 +143,7 @@ public class JsonUtils
 
     /// <summary>
     /// Serialize Object to Json string
+    /// Automatically uses AOT-friendly context if available
     /// </summary>
     /// <param name="obj"></param>
     /// <param name="indented"></param>
@@ -100,8 +158,46 @@ public class JsonUtils
             {
                 return result;
             }
+
+            // Try to use AOT context if available
+            if (_defaultAotContext != null && obj != null)
+            {
+                var typeInfo = _defaultAotContext.GetTypeInfo(obj.GetType());
+                if (typeInfo != null)
+                {
+                    result = JsonSerializer.Serialize(obj, typeInfo);
+                    return result;
+                }
+            }
+
+            // Fallback to reflection-based serialization
             var options = nullValue ? _nullValueSerializeOptions : _defaultSerializeOptions;
             result = JsonSerializer.Serialize(obj, options);
+        }
+        catch (Exception ex)
+        {
+            Logging.SaveLog(_tag, ex);
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// Serialize Object to Json string with JsonTypeInfo (AOT-friendly)
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="obj"></param>
+    /// <param name="jsonTypeInfo"></param>
+    /// <returns></returns>
+    public static string Serialize<T>(T obj, JsonTypeInfo<T> jsonTypeInfo)
+    {
+        var result = string.Empty;
+        try
+        {
+            if (obj == null)
+            {
+                return result;
+            }
+            result = JsonSerializer.Serialize(obj, jsonTypeInfo);
         }
         catch (Exception ex)
         {
