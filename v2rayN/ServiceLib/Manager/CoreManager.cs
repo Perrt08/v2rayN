@@ -89,6 +89,40 @@ public class CoreManager
         await CoreStartPreService(node);
         if (_processService != null)
         {
+            if ((node?.CoreType ?? ECoreType.Xray) == ECoreType.Xray && _config.TunModeItem.EnableTun)
+            {
+                await Task.Delay(500);
+                var defaultLocalIp = RouteManager.GetDefaultLocalIp();
+                if (!defaultLocalIp.IsNullOrEmpty())
+                {
+                    var (proc, arg) = RouteManager.RedirectToTun(defaultLocalIp, "xray_tun");
+                    if (Utils.IsWindows())
+                    {
+                        _ = await Utils.GetCliWrapOutput(proc, arg);
+                    }
+                    else
+                    {
+                        StringBuilder sb = new();
+                        sb.AppendLine("#!/bin/bash");
+                        var cmdLine = $"{proc} {arg}";
+                        sb.AppendLine($"exec sudo -S -- {cmdLine}");
+                        var shFilePath = await FileUtils.CreateLinuxShellFile("run_as_sudo.sh", sb.ToString(), true);
+
+                        var procService = new ProcessService(
+                            fileName: shFilePath,
+                            arguments: "",
+                            workingDirectory: Utils.GetBinConfigPath(),
+                            displayLog: true,
+                            redirectInput: true,
+                            environmentVars: null,
+                            updateFunc: _updateFunc
+                        );
+
+                        await procService.StartAsync(AppManager.Instance.LinuxSudoPwd);
+                    }
+                }
+            }
+
             await UpdateFunc(true, $"{node.GetSummary()}");
         }
     }
@@ -156,6 +190,37 @@ public class CoreManager
                 _processPreService.Dispose();
                 _processPreService = null;
             }
+
+
+            var defaultLocalIp = RouteManager.GetDefaultLocalIp();
+            if (!defaultLocalIp.IsNullOrEmpty())
+            {
+                var (proc, arg) = RouteManager.RemoveRouteFromTun(defaultLocalIp, "xray_tun");
+                if (Utils.IsWindows())
+                {
+                    _ = await Utils.GetCliWrapOutput(proc, arg);
+                }
+                else
+                {
+                    StringBuilder sb = new();
+                    sb.AppendLine("#!/bin/bash");
+                    var cmdLine = $"{proc} {arg}";
+                    sb.AppendLine($"exec sudo -S -- {cmdLine}");
+                    var shFilePath = await FileUtils.CreateLinuxShellFile("run_as_sudo.sh", sb.ToString(), true);
+
+                    var procService = new ProcessService(
+                        fileName: shFilePath,
+                        arguments: "",
+                        workingDirectory: Utils.GetBinConfigPath(),
+                        displayLog: true,
+                        redirectInput: true,
+                        environmentVars: null,
+                        updateFunc: _updateFunc
+                    );
+
+                    await procService.StartAsync(AppManager.Instance.LinuxSudoPwd);
+                }
+            }
         }
         catch (Exception ex)
         {
@@ -187,7 +252,7 @@ public class CoreManager
             var itemSocks = await ConfigHandler.GetPreSocksItem(_config, node, coreType);
             if (itemSocks != null)
             {
-                var preCoreType = itemSocks.CoreType ?? ECoreType.sing_box;
+                var preCoreType = itemSocks.CoreType ?? (Utils.IsMacOS() ? ECoreType.sing_box : ECoreType.Xray);
                 var fileName = Utils.GetBinConfigPath(Global.CorePreConfigFileName);
                 var result = await CoreConfigHandler.GenerateClientConfig(itemSocks, fileName);
                 if (result.Success)
@@ -226,7 +291,7 @@ public class CoreManager
         {
             if (mayNeedSudo
                 && _config.TunModeItem.EnableTun
-                && coreInfo.CoreType == ECoreType.sing_box
+                && coreInfo.CoreType is ECoreType.sing_box or ECoreType.Xray
                 && Utils.IsNonWindows())
             {
                 _linuxSudo = true;

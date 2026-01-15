@@ -55,13 +55,17 @@ internal static class WindowsUtils
     {
         try
         {
-            var sum = MD5.HashData(Encoding.UTF8.GetBytes("wintunsingbox_tun"));
-            var guid = new Guid(sum);
-            var pnpUtilPath = @"C:\Windows\System32\pnputil.exe";
-            var arg = $$""" /remove-device  "SWD\Wintun\{{{guid}}}" """;
+            List<string> tunList = ["wintunsingbox_tun", "wintunxray_tun"];
+            foreach (var tun in tunList)
+            {
+                var sum = MD5.HashData(Encoding.UTF8.GetBytes(tun));
+                var guid = new Guid(sum);
+                var pnpUtilPath = @"C:\Windows\System32\pnputil.exe";
+                var arg = $$""" /remove-device  "SWD\Wintun\{{{guid}}}" """;
 
-            // Try to remove the device
-            _ = await Utils.GetCliWrapOutput(pnpUtilPath, arg);
+                // Try to remove the device
+                _ = await Utils.GetCliWrapOutput(pnpUtilPath, arg);
+            }
         }
         catch (Exception ex)
         {

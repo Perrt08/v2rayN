@@ -75,6 +75,10 @@ public class Inboundsettings4Ray
     public bool? allowTransparent { get; set; }
 
     public List<AccountsItem4Ray>? accounts { get; set; }
+
+    public string? name { get; set; }
+
+    public int? MTU { get; set; }
 }
 
 public class UsersItem4Ray
@@ -469,6 +473,8 @@ public class AccountsItem4Ray
 public class Sockopt4Ray
 {
     public string? dialerProxy { get; set; }
+
+    [JsonPropertyName("interface")] public string? Interface { get; set; }
 }
 
 public class FragmentItem4Ray

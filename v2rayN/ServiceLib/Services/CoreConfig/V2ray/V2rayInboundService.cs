@@ -38,6 +38,22 @@ public partial class CoreConfigV2rayService
                     inbound.listen = listen;
                 }
             }
+
+            if (_config.TunModeItem.EnableTun)
+            {
+                if (_config.TunModeItem.Mtu <= 0)
+                {
+                    _config.TunModeItem.Mtu = Global.TunMtus.First();
+                }
+
+                var tunInbound = new Inbounds4Ray()
+                {
+                    protocol = "tun",
+                    tag = "tun",
+                    settings = new() { name = "xray_tun", MTU = _config.TunModeItem.Mtu, }
+                };
+                v2rayConfig.inbounds.Add(tunInbound);
+            }
         }
         catch (Exception ex)
         {

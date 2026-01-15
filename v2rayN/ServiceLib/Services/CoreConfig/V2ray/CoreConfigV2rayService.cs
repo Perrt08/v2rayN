@@ -70,6 +70,18 @@ public partial class CoreConfigV2rayService(Config config)
             ret.Msg = string.Format(ResUI.SuccessfulConfiguration, "");
             ret.Success = true;
             ret.Data = await ApplyFullConfigTemplate(v2rayConfig);
+
+            if (_config.TunModeItem.EnableTun)
+            {
+                var defaultLocalName = RouteManager.GetDefaultInterfaceName();
+                foreach (var outbound in v2rayConfig.outbounds)
+                {
+                    outbound.streamSettings ??= new();
+                    outbound.streamSettings.sockopt ??= new();
+                    outbound.streamSettings.sockopt.Interface = defaultLocalName;
+                }
+            }
+
             return ret;
         }
         catch (Exception ex)
@@ -178,6 +190,18 @@ public partial class CoreConfigV2rayService(Config config)
             ret.Success = true;
 
             ret.Data = await ApplyFullConfigTemplate(v2rayConfig);
+
+            if (_config.TunModeItem.EnableTun)
+            {
+                var defaultLocalName = RouteManager.GetDefaultInterfaceName();
+                foreach (var outbound in v2rayConfig.outbounds)
+                {
+                    outbound.streamSettings ??= new();
+                    outbound.streamSettings.sockopt ??= new();
+                    outbound.streamSettings.sockopt.Interface = defaultLocalName;
+                }
+            }
+
             return ret;
         }
         catch (Exception ex)
@@ -235,6 +259,18 @@ public partial class CoreConfigV2rayService(Config config)
             ret.Success = true;
 
             ret.Data = await ApplyFullConfigTemplate(v2rayConfig);
+
+            if (_config.TunModeItem.EnableTun)
+            {
+                var defaultLocalName = RouteManager.GetDefaultInterfaceName();
+                foreach (var outbound in v2rayConfig.outbounds)
+                {
+                    outbound.streamSettings ??= new();
+                    outbound.streamSettings.sockopt ??= new();
+                    outbound.streamSettings.sockopt.Interface = defaultLocalName;
+                }
+            }
+
             return ret;
         }
         catch (Exception ex)

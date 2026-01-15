@@ -1253,7 +1253,7 @@ public static class ConfigHandler
     public static async Task<ProfileItem?> GetPreSocksItem(Config config, ProfileItem node, ECoreType coreType)
     {
         ProfileItem? itemSocks = null;
-        if (node.ConfigType != EConfigType.Custom && coreType != ECoreType.sing_box && config.TunModeItem.EnableTun)
+        if (node.ConfigType != EConfigType.Custom && coreType != ECoreType.sing_box && config.TunModeItem.EnableTun && Utils.IsMacOS())
         {
             var tun2SocksAddress = node.Address;
             if (node.ConfigType.IsGroupType())
@@ -1275,7 +1275,8 @@ public static class ConfigHandler
         }
         else if (node.ConfigType == EConfigType.Custom && node.PreSocksPort > 0)
         {
-            var preCoreType = AppManager.Instance.RunningCoreType = config.TunModeItem.EnableTun ? ECoreType.sing_box : ECoreType.Xray;
+            var preCoreType = AppManager.Instance.RunningCoreType =
+                config.TunModeItem.EnableTun && Utils.IsMacOS() ? ECoreType.sing_box : ECoreType.Xray;
             itemSocks = new ProfileItem()
             {
                 CoreType = preCoreType,
