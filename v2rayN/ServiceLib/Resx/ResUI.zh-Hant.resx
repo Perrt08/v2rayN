@@ -1653,4 +1653,7 @@
   <data name="TbHopInt7" xml:space="preserve">
     <value>Port hopping interval</value>
   </data>
+  <data name="menuExport2InnerUrl" xml:space="preserve">
+    <value>Export Internal Share Link to Clipboard</value>
+  </data>
 </root>

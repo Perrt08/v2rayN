@@ -1328,8 +1328,31 @@ public static class ConfigHandler
         {
             arrData = arrData.Distinct();
         }
+        Dictionary<string, string> dictInnerUriIndex = new();
         foreach (var str in arrData)
         {
+            // inner uri link resolve, v2rayn://
+            if (str.StartsWith(Global.InnerUriProtocol, StringComparison.OrdinalIgnoreCase))
+            {
+                var jsonBase64Str = str.Substring(Global.InnerUriProtocol.Length).Trim();
+                var importProfileItem = JsonUtils.Deserialize<ProfileItem>(Utils.Base64Decode(jsonBase64Str));
+                if (importProfileItem.ConfigVersion < 2)
+                {
+                    continue;
+                }
+                if (!importProfileItem.IndexId.IsNullOrEmpty())
+                {
+                    var innerIndexId = Utils.GetGuid(false);
+                    dictInnerUriIndex[importProfileItem.IndexId] = innerIndexId;
+                    importProfileItem.IndexId = innerIndexId;
+                }
+                importProfileItem.Subid = subid;
+                importProfileItem.IsSub = isSub;
+                countServers++;
+                lstAdd.Add(importProfileItem);
+                continue;
+            }
+
             //maybe sub
             if (!isSub && (str.StartsWith(Global.HttpsProtocol) || str.StartsWith(Global.HttpProtocol)))
             {
@@ -1374,6 +1397,44 @@ public static class ConfigHandler
             {
                 countServers++;
                 lstAdd.Add(profileItem);
+            }
+        }
+
+        // override group child items and remove empty groups
+        for (var i = lstAdd.Count - 1; i >= 0; i--)
+        {
+            var item = lstAdd[i];
+            if (!item.ConfigType.IsGroupType())
+            {
+                continue;
+            }
+
+            var protocolExtra = item.GetProtocolExtra();
+            var childIndexIdList = Utils.String2List(protocolExtra.ChildItems);
+            if (childIndexIdList != null)
+            {
+                var newChildIndexIdList = childIndexIdList
+                    .Where(x => !x.IsNullOrEmpty())
+                    .Select(x => dictInnerUriIndex.GetValueOrDefault(x, x))
+                    .ToList();
+                item.SetProtocolExtra(protocolExtra with
+                {
+                    ChildItems = Utils.List2String(newChildIndexIdList)
+                });
+            }
+            if (!protocolExtra.SubChildItems.IsNullOrEmpty())
+            {
+                item.SetProtocolExtra(protocolExtra with
+                {
+                    SubChildItems = subid
+                });
+            }
+            protocolExtra = item.GetProtocolExtra();
+            if (protocolExtra.SubChildItems.IsNullOrEmpty() &&
+                protocolExtra.ChildItems.IsNullOrEmpty())
+            {
+                lstAdd.RemoveAt(i);
+                countServers--;
             }
         }
 

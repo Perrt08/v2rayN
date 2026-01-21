@@ -1015,6 +1015,15 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
+        ///   查找类似 Export Internal Share Link to Clipboard 的本地化字符串。
+        /// </summary>
+        public static string menuExport2InnerUrl {
+            get {
+                return ResourceManager.GetString("menuExport2InnerUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Export Share Link to Clipboard 的本地化字符串。
         /// </summary>
         public static string menuExport2ShareUrl {

@@ -191,6 +191,7 @@
                                 Header="{x:Static resx:ResUI.menuExport2ShareUrl}"
                                 InputGesture="Ctrl+C" />
                             <MenuItem x:Name="menuExport2ShareUrlBase64" Header="{x:Static resx:ResUI.menuExport2ShareUrlBase64}" />
+                            <MenuItem x:Name="menuExport2InnerUrl" Header="{x:Static resx:ResUI.menuExport2InnerUrl}" />
                         </MenuItem>
                         <Separator />
                         <MenuItem Header="{x:Static resx:ResUI.menuGenGroupMultipleServer}">
