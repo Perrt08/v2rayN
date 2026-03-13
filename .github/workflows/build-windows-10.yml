@@ -22,11 +22,8 @@ jobs:
       BUILD_MATRIX: |
         [
           {"runtime":"win-x64",  "package_arch":"windows-64-dotnet10",                      "self_contained":false, "optimize":false},
-          {"runtime":"win-arm64","package_arch":"windows-arm64-dotnet10",                   "self_contained":false, "optimize":false},
           {"runtime":"win-x64",  "package_arch":"windows-64-SelfContained-dotnet10",        "self_contained":true,  "optimize":false},
-          {"runtime":"win-arm64","package_arch":"windows-arm64-SelfContained-dotnet10",     "self_contained":true,  "optimize":false},
           {"runtime":"win-x64",  "package_arch":"windows-64-r2r-dotnet10",                  "self_contained":false, "optimize":true},
-          {"runtime":"win-arm64","package_arch":"windows-arm64-r2r-dotnet10",               "self_contained":false, "optimize":true},
           {"runtime":"win-x86",  "package_arch":"windows-86-dotnet10",                      "self_contained":false, "optimize":false},
           {"runtime":"win-x86",  "package_arch":"windows-86-SelfContained-dotnet10",        "self_contained":true,  "optimize":false},
           {"runtime":"win-x86",  "package_arch":"windows-86-r2r-dotnet10",                  "self_contained":false, "optimize":true}

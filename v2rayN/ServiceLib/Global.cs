@@ -140,7 +140,7 @@ public class Global
 
     public static readonly List<string> SpeedTestUrls =
     [
-        @"https://cachefly.cachefly.net/50mb.test",
+        @"https://raw.githubusercontent.com/Loyalsoldier/geoip/refs/heads/release/geoip.dat",
         @"https://speed.cloudflare.com/__down?bytes=10000000",
         @"https://speed.cloudflare.com/__down?bytes=50000000",
         @"https://speed.cloudflare.com/__down?bytes=100000000",
@@ -184,10 +184,15 @@ public class Global
 
     public static readonly Dictionary<string, string> UserAgentTexts = new()
     {
-        {"chrome","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36" },
-        {"firefox","Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0" },
-        {"safari","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15" },
-        {"edge","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.70" },
+        {"chrome","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" },
+        {"firefox","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2; rv:139.578.445) Gecko/20100101 Firefox/139.578.445" },
+        {"safari","Mozilla/5.0 (Macintosh; Intel Mac OS X 11_0_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/19.0 Safari/605.1.15 Gear/6.21.8" },
+        {"edge","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.6" },
+        {"opera-linux","Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/139.0.7258.160 Safari/537.36 OPR/120.0.5543.93"},
+        {"opera-windows","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 OPR/120.0.0.0 (Edition Yx GX TR 2)" },
+        {"qqbrowser-honor-gt","Mozilla/5.0 (Linux; U; Android 16; zh-cn; AMG-AN00 Build/HONORAMG-AN00) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/121.0.6167.71 MQQBrowser/19.7 Mobile Safari/537.36 COVC/048601"},
+        {"huawei","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36 HBPC/12.1.4.300"},
+        {"gnome-web","Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/60.5 Safari/605.1.15"},
         {"none",""}
     };
 
@@ -393,6 +398,11 @@ public class Global
         "firefox",
         "safari",
         "edge",
+        "opera-linux",
+        "opera-windows",
+        "qqbrowser-honor-gt",
+        "huawei",
+        "gnome-web",
         "none"
     ];
 
@@ -424,34 +434,29 @@ public class Global
 
     public static readonly List<string> DomainDirectDNSAddress =
     [
-        "https://dns.alidns.com/dns-query",
+        "https://doh.360.cn",
         "https://doh.pub/dns-query",
-        "https://dns.alidns.com/dns-query,https://doh.pub/dns-query",
-        "223.5.5.5",
-        "119.29.29.29",
+        "180.184.2.2",
+        "52.80.52.52",
         "localhost"
     ];
 
     public static readonly List<string> DomainRemoteDNSAddress =
     [
-        "https://cloudflare-dns.com/dns-query",
         "https://dns.google/dns-query",
-        "https://cloudflare-dns.com/dns-query,https://dns.google/dns-query,8.8.8.8",
-        "https://dns.cloudflare.com/dns-query",
-        "https://doh.dns.sb/dns-query",
-        "https://doh.opendns.com/dns-query",
-        "https://common.dot.dns.yandex.net",
+        "https://freedns.controld.com/p2",
+        "https://anycast.dns.nextdns.io",
+        "https://dns.adguard-dns.com/dns-query",
         "8.8.8.8",
-        "1.1.1.1",
-        "185.222.222.222",
-        "208.67.222.222",
-        "77.88.8.8"
+        "94.140.14.14",
+        "95.85.95.85",
+        "76.76.2.2"
     ];
 
     public static readonly List<string> DomainPureIPDNSAddress =
     [
-        "223.5.5.5",
-        "119.29.29.29",
+        "52.80.52.52",
+        "180.184.2.2",
         "localhost"
     ];
 
@@ -658,20 +663,13 @@ public class Global
 
     public static readonly Dictionary<string, List<string>> PredefinedHosts = new()
     {
-        { "dns.google", ["8.8.8.8", "8.8.4.4", "2001:4860:4860::8888", "2001:4860:4860::8844"] },
-        { "dns.alidns.com", ["223.5.5.5", "223.6.6.6", "2400:3200::1", "2400:3200:baba::1"] },
-        { "one.one.one.one", ["1.1.1.1", "1.0.0.1", "2606:4700:4700::1111", "2606:4700:4700::1001"] },
-        { "1dot1dot1dot1.cloudflare-dns.com", ["1.1.1.1", "1.0.0.1", "2606:4700:4700::1111", "2606:4700:4700::1001"] },
-        { "cloudflare-dns.com", ["104.16.249.249", "104.16.248.249", "2606:4700::6810:f8f9", "2606:4700::6810:f9f9"] },
-        { "dns.cloudflare.com", ["104.16.132.229", "104.16.133.229", "2606:4700::6810:84e5", "2606:4700::6810:85e5"] },
-        { "dot.pub", ["1.12.12.12", "120.53.53.53"] },
-        { "doh.pub", ["1.12.12.12", "120.53.53.53"] },
-        { "dns.quad9.net", ["9.9.9.9", "149.112.112.112", "2620:fe::fe", "2620:fe::9"] },
-        { "dns.yandex.net", ["77.88.8.8", "77.88.8.1", "2a02:6b8::feed:0ff", "2a02:6b8:0:1::feed:0ff"] },
-        { "dns.sb", ["185.222.222.222", "2a09::"] },
-        { "dns.umbrella.com", ["208.67.220.220", "208.67.222.222", "2620:119:35::35", "2620:119:53::53"] },
-        { "dns.sse.cisco.com", ["208.67.220.220", "208.67.222.222", "2620:119:35::35", "2620:119:53::53"] },
-        { "engage.cloudflareclient.com", ["162.159.192.1"] }
+        { "dns.google", new List<string> { "8.8.8.8", "8.8.4.4", "2001:4860:4860::8888", "2001:4860:4860::8844" } },
+        { "doh.360.cn", new List<string> { "101.91.111.153", "106.63.24.74", "36.99.170.86", "112.65.69.15" } },
+        { "doh.pub", new List<string> { "1.12.12.12", "120.53.53.53" } },
+        { "freedns.controld.com", new List<string> { "76.76.2.11", "2606:1a40::11" } },
+        { "anycast.dns.nextdns.io", new List<string> { "45.90.30.0", "45.90.28.0", "2a07:a8c0::", "2a07:a8c1::" } },
+        { "dns.adguard-dns.com", new List<string> { "94.140.14.14", "94.140.15.15", "2a10:50c0::ad1:ff", "2a10:50c0::ad2:ff" } },
+        { "engage.cloudflareclient.com", new List<string> { "162.159.192.1", "2606:4700:d0::a29f:c001" } }
     };
 
     public static readonly List<string> ExpectedIPs =
